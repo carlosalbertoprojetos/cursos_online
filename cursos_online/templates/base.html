@@ -17,37 +17,43 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-sm py-3 border-bottom navbar-light">
-        <div class="container">
-            <a href="#" class="navbar-brand">
-                <span class="font-weight-bold h3">Home</span>
-            </a>
+    <div class="container-flex">
+        <nav class="navbar navbar-expand-sm py-3 border-bottom navbar-light">
+            <div class="container">
+                <a href="{% url 'home' %}" class="navbar-brand">
+                    <span class="font-weight-bold h3">Home</span>
+                </a>
 
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"> </span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link lead mr-4 font-weight-bold">Opção1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link lead mr-4 font-weight-bold">Opção2</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link lead mr-4 font-weight-bold">Opção3</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/admin/" class="nav-link lead mr-4 font-weight-bold">Admin</a>
-                    </li>
-                </ul>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"> </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="{% url 'contato' %}" class="nav-link lead mr-4 font-weight-bold">Contato</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link lead mr-4 font-weight-bold">Opção2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link lead mr-4 font-weight-bold">Opção3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/" class="nav-link lead mr-4 font-weight-bold">Admin</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </nav>
+        <br>
+        {% block content %}
+
+        {% endblock content %}
+        <br>
+        <div class="footer">
+            Sistema para auxílio na gestão de cursos à distância
         </div>
-    </nav>
-
-    {% block content %}
-    {% endblock content %}
-
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
         crossorigin="anonymous"></script>

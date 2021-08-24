@@ -174,13 +174,15 @@
 }
 
 /* Rodapé */
-footer {
-    background-color: #333;
-    height: 300px;
-    border-top: 2px solid #202020;
+.footer {
+    background: #111;
+    color: #666;
+    text-align: center;
+    padding: 1em;
+    font-size: 80%;
 }
 
-footer p {
+.footer p {
     color: #f5f5f5;
     text-align: center;
     top: 50%;
