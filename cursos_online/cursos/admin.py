@@ -1,3 +1,15 @@
 from django.contrib import admin
 
-# Register your models here.
+
+from .models import Cursos
+
+
+class CursosAdmin(admin.ModelAdmin):
+
+    list_display = ['nome', 'slug', 'start_date', 'created_at']
+    search_fields = ['nome', 'slug']
+    prepopulated_fields = {'slug':('nome',)}
+
+
+admin.site.register(Cursos, CursosAdmin)
+

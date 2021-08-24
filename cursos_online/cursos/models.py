@@ -4,15 +4,14 @@ from django.utils import timezone
 
 
 
-# class CourseManager(models.Manager):
+class CoursosManager(models.Manager):
 
-#     def search(self, query):
-#         return self.get_queryset().filter(
-#             models.Q(name__icontains = query) | \
-#             models.Q(description__icontains = query)
-#         )
+    def search(self, query):
+        return self.get_queryset().filter(
+            models.Q(name__icontains = query) | \
+            models.Q(description__icontains = query)
+        )
 # o models.Q() é uma espécie de filtro ( | sgnifica ou e & significa e)
-
 
 
 class Cursos(models.Model):
