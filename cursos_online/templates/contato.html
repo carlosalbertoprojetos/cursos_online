@@ -8,41 +8,53 @@
 
 
 {% block header %}
-    <header class="masthead" style="background-image: url(/static/img/contact-bg1.jpg)">
-        <div class="overlay"></div>
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="page-heading">
-                        <h1>Envie seu email</h1>
-                        <span class="subheading">Tem alguma pergunta?</span>
-                    </div>
-                </div>
+{% endblock header %}
+{% block content %} 
+<header class="masthead" style="background-image: url(/static/img/contact-bg1.jpg)">
+</header>
+<div class="overlay">
+    <div class="container">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="page-heading">
+                <h1>Fale conosco</h1>
+                <p class="subheading">Você pode entrar em contato conosco tanto por e-mail como pelas redes sociais, abaixo seguem os links para contato:</p>
+                <h4>Links:</h4>
+                <ul>
+                    <li>E-mail: <a href='cursos_online@cursos_online.com'></a></li>
+                    <li>Facebook: <a href='https://facebook.com/cursos_online@cursos_online.com'>Cursos_OnFace</a></li>
+                    <li>Instagram: <a href='https://instagram.com/cursos_online@cursos_online.com'>Cursos_OnInsta</a></li>
+                    <li>Twitter: <a href='https://twitter.com/cursos_online@cursos_online.com'>Cursos_OnTwitter</a></li>
+                </ul>
             </div>
         </div>
-    </header>
-{% endblock header %}
+    </div>
+</div>
 
 
-{% block content %} 
+
+
 <div class="container">      
     <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">      
-        <form method="POST" action="{% url 'contato' %}">
-            {% csrf_token %}      
-            {{form}}
-            <br>
-            {% if fail %}    
-            <div id="fail">Erro ao enviar sua mensagem de E-mail!</div>
-            {% elif success %}
-            <div id="success">E-mail enviado com sucesso!</div>
-            {% endif %}
-            <br>
-            <div class="form-group">
-            <button type="submit" class="btn btn-primary" id="sendMessageButton">Enviar</button>
-            </div>
-        </form>
-        <br>
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <h3>Tire suas dúvidas</h3> <br>
+            <form method="POST" action="{% url 'contato' %}">
+                {% csrf_token %}  
+                <table>
+                    <tbody>
+                        {{ form.as_table }}
+                    </tbody>
+                </table>
+                <br>
+                {% if fail %}    
+                <div id="fail">Erro ao enviar sua mensagem de E-mail!</div>
+                {% elif success %}
+                <div id="success">E-mail enviado com sucesso!</div>
+                {% endif %}
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="sendMessageButton">Enviar</button>
+                </div>
+            </form><br>
         </div>
     </div>
 </div>  

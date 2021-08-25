@@ -5,8 +5,8 @@ from .forms import FormContato
 
 
 def contatoView(request):
+    
     send = False
-
     form = FormContato(request.POST or None)
     if form.is_valid():
         #enviar e-mail
@@ -20,12 +20,15 @@ def contatoView(request):
             ["cursos_online@cursos_online.com"],
             reply_to=[email]     
         )
+
         try:
             email.send()
             send = True
         except:
             send = False       
-
+        
+        form = FormContato()
+        
     context = {
         'form':form,
         'success':send
