@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 
-class CoursosManager(models.Manager):
+class CursosManager(models.Manager):
 
     def search(self, query):
         return self.get_queryset().filter(
@@ -30,13 +30,13 @@ class Cursos(models.Model):
     created_at = models.DateTimeField('Criado em', auto_now_add = True)
     updated_at = models.DateTimeField('Atualizado em ', auto_now_add = True)
     
-    # objects = CourseManager()
+    objects = CursosManager()
 
     def __str__(self):
         return self.nome
 
-    def get_absolute_url(self):
-        return reverse('courses:details', args = [self.slug])
+    # def get_absolute_url(self):
+    #     return reverse('cursos:details', args = [self.slug])
 
     # def release_lessons(self):
     #     today = timezone.now().date()

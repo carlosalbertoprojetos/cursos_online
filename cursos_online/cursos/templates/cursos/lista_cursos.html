@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <body class="d-flex flex-column min-vh-100">
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-1">
+                <div class="l-box">
+                    <h1 class="content-subhead">Lista de Cursos</h1>
+                    <h2>Abaixo a lista de cursos disponíveis na plataforma</h2>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% for curso in lista_cursos %}
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-1-3">
+                <div class="l-box">
+                    <a href="#">
+                    {% if curso.imagem %}
+                    <img src="{{ curso.imagem.url }}" alt="{{ curso.nome }}" />
+                    {% else %}
+                    <img src="{% static 'img/course-image.png' %}" alt="{{ curso.nome }}" />
+                    {% endif %}
+                    </a>
+                </div>
+            </div>
+            <div class="pure-u-2-3">
+                <div class="l-box">
+
+                    <h4 class="content-subhead"><a href="#" title="">{{ curso.nome }}</a></h4>
+                    {{ curso.descricao | truncatechars:"200" }}
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-1">
+                <div class="l-box">
+                    <p>Não há cursos disponíveis na plataforma</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+
+
+
