@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <body class="d-flex flex-column min-vh-100">
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-1">
+                <div class="l-box">
+                <h1 class="splash-head">
+                    {{ curso }}
+                </h1>
+                <h2 class="splash-subhead">
+                    {{ curso.descricao }}
+                </h2>
+                <p>
+                    <a href="#" class="pure-button primary-button">Inscreva-se</a>
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-2-3">
+                <div class="l-box">
+                    <h4 class="content-subhead">Sobre o Curso</h4>
+                    {{ curso.sobre|linebreaks }}
+                </div>
+            </div>
+        </div>
+        <div class="pure-u-1-3">
+            <div class="l-box">
+                {% if curso.imagem %}
+                <img src="{{ curso.imagem.url }}" alt="" />
+                {% else %}
+                <img src="{% static 'img/course-image.png' %}" alt="" />
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</div>
+{% endblock %}
+
+

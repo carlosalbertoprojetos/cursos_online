@@ -19,7 +19,7 @@ class Cursos(models.Model):
     nome = models.CharField('Nome', max_length = 100)
     slug = models.SlugField('Atalho')
     descricao = models.TextField('Descrição Simples', blank = True)
-    sbore = models.TextField('Sobre o Curso', blank = True)
+    sobre = models.TextField('Sobre o Curso', blank = True)
     start_date = models.DateField(
         'Data de início', null = True, blank = True, 
         )
@@ -35,8 +35,8 @@ class Cursos(models.Model):
     def __str__(self):
         return self.nome
 
-    # def get_absolute_url(self):
-    #     return reverse('cursos:details', args = [self.slug])
+    def get_absolute_url(self):
+        return reverse('cursos:detalhes_curso', args = [self.slug])
 
     # def release_lessons(self):
     #     today = timezone.now().date()
