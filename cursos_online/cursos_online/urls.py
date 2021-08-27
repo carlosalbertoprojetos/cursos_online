@@ -19,12 +19,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from . import views
-
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('contato/', views.contatoView, name='contato'),
+    path('contato/', TemplateView.as_view(template_name='contato.html'), name='contato'),    
 
     # apps
     path('cursos/', include('cursos.urls', namespace='cursos')),

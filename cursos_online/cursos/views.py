@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
+from django.core.mail import EmailMessage
 
 
 from .models import Cursos
-from cursos_online.forms import FormContato
+from .forms import FormContatoCurso
 
 
 
@@ -29,18 +31,46 @@ def detalhes_CursoView(request, slug):
     curso = get_object_or_404(Cursos, slug=slug)
     context = {}
     if request.method == 'POST':
-        form = FormContato(request.POST)
+        form = FormContatoCurso(request.POST)
         if form.is_valid():
-            context['is_valid'] = True
-            form = FormContato()
+            context['is_valid'] = True # aciona a mensagem
+            form.send_email(curso)
+            form = FormContatoCurso()
     else:
-        form = FormContato()
+        form = FormContatoCurso()
     context['curso'] = curso
     context['form']= form
     template_name = 'cursos/detalhes_curso.html'
     return render(request, template_name, context)
 
 
-
-
     
+def contatoCursoView(request):
+    send = False
+    form = FormContatoCurso(request.POST or None)
+    if form.is_valid():
+        #enviar e-mail
+        nome = request.POST.get('nome','')
+        email = request.POST.get('email','')
+        mensagem = request.POST.get('mensagem','')
+        email = EmailMessage(
+            "Mensagem de Cursos Online",
+            "De {} <{}> Escreveu: \n\n{}".format(nome,email,mensagem),
+            "nao-responder@inbox.mailtrap.io",
+            ["cursos_online@cursos_online.com"],
+            reply_to=[email]     
+        )
+
+        try:
+            email.send()
+            send = True
+        except:
+            send = False       
+        
+        form = FormContatoCurso()
+        
+    context = {
+        'form':form,
+        'success':send
+    }
+    return render(request,'cursos/contato_curso.html',context)   

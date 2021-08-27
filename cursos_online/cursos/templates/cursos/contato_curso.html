@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<formset>
+    <p><strong>Nome</strong>: {{ nome }}</p>
+    <p><strong>E-mail</strong>: {{ email }}</p>
+    {{ messagem | linebreaks }}
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" id="sendMessageButton">Enviar</button>
+    </div>
+</formset> 
+<div class="container">      
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <h3>Tire suas dúvidas</h3> <br>
+            <form method="POST" action="{% url 'contato' %}">
+                {% csrf_token %}  
+                <table>
+                    <tbody>
+                        {{ form.as_table }}
+                    </tbody>
+                </table>
+                <br>
+                {% if fail %}    
+                <div id="fail">Erro ao enviar sua mensagem de E-mail!</div>
+                {% elif success %}
+                <div id="success">E-mail enviado com sucesso!</div>
+                {% endif %}
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="sendMessageButton">Enviar</button>
+                </div>
+            </form><br>
+        </div>
+    </div>
+</div>  
+
+{% endblock content %}
+
