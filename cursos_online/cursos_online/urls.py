@@ -26,6 +26,7 @@ urlpatterns = [
 
     # apps
     path('cursos/', include('cursos.urls', namespace='cursos')),
+    path('conta/', include('accounts.urls', namespace='accounts')),    
 
     # admin django
     path('admin/', admin.site.urls),

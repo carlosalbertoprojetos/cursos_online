@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-3">
+    <h1>Login</h1><hr style = 'margin: -10px 0 15px 0'>
+    <div class="card card-header card" style = 'padding: 0px 15px'>
+        <form class="pure-form pure-form-stacked" method="post">
+            {% csrf_token %}
+            <fieldset>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+
+                {% endfor %}
+
+                <div class="pure-controls" style='margin-top: 10px;'>
+                    <button type="submit" class="pure-button pure-button-primary">Entrar</button>
+                </div>
+            </fieldset>
+            <p style = 'margin: auto; padding-bottom:10px;'>
+                Não é cadastrado? <a href="{% url 'accounts:cadastro' %}" title="">Cadastre-se</a> <br />
+                Esqueceu a senha? <a href="" title="">Nova senha</a> <br />
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

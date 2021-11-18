@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # meus apps
     'cursos',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -154,4 +155,9 @@ EMAIL_PORT = '2525'
 CONTACT_EMAIL = 'carlosalbertoprojetos2020@gmail.com'
 
 
+# Auth
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'accounts:painel'
+LOGOUT_URL = 'accounts:logout'
+LOGOUT_REDIRECT_URL = '/'
 
