@@ -2,8 +2,8 @@
 
 {% block breadcrumb %}
     {{ block.super }}
-    <li style='margin:0 8px'> / </li>
-    <li><a href="{% url 'accounts:editar' %}"> Editar Conta</a></li>
+    <li style='margin: 5px;'>/</li>
+    <li><a class="font-weight-bold" href="{% url 'accounts:editar' %}"> Editar Conta</a></li>
 {% endblock %}
 
 {% block dashboard_content %}
@@ -11,13 +11,13 @@
 <form class="pure-form pure-form-stacked" method="POST">
     {% csrf_token %}
     {% if success %}
-    <p>Os dados forma alterados com sucesso</p>
+    <h1 class="font-weight-bold" style='margin: 10px 0 0 0'>Os dados alterados com sucesso!!!</h1>
     {% endif %}
     <fieldset>
         {{ form.non_field_errors }}
         {% for field in form %}
         <div class="pure-control-group">
-            {{ field.label_tag }}
+            <p style='padding: 0; margin: 2px 0 0 0;'>{{ field.label_tag }}</p>
             {{ field }}
             {{ field.errors }}
         </div>

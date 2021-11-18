@@ -182,3 +182,7 @@ ul.breadcrumb li a {
     display: inline-block;
     padding: 0.3em 0.7em;
 }
+
+.bread {
+    display: inline;
+}
