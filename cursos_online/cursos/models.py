@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.conf import settings
 
 
 
@@ -48,3 +49,10 @@ class Cursos(models.Model):
         ordering = ['nome'] # ['-name'] ordem decrescente
     
 
+
+# class Enrollment(models.Model):
+    
+#     user = models.ForeignKey(
+#         settings.AUTH_USER_MODEL, verbose_name='Usuário', 
+#         related_name='enrollments')
+#     pass

@@ -12,7 +12,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('painel/', views.painel, name='painel'),
     path('cadastrar/', views.CadastrarView.as_view(), name='cadastro'),
-    path('editar/', views.editar, name='editar'),
+    path('editar/uauario/', views.editar_usuario, name='editar_usuario'),
+    path('editar/senha/', views.editar_senha, name='editar_senha'),
 ]
 
 

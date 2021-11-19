@@ -6,7 +6,7 @@
     <div class="pure-u-1">
         <ul class="bread breadcrumb" style='margin: 0 auto 10px 0;'>
             {% block breadcrumb %}
-            <li><a class="font-weight-bold" href="{% url 'accounts:painel' %}">Meu Painel</a></li>
+            <li><a class="" href="{% url 'accounts:painel' %}">Meu Painel</a></li>
             {% endblock %}
         </ul>
     </div>
@@ -19,8 +19,8 @@
                         <li><a href="#">Curso 1</a></li>
                         <li><a href="#">Curso 2</a></li>
                         <li class="font-weight-bold pure-menu-heading">Minha Conta</li>
-                        <li><a href="{% url 'accounts:editar' %}">Editar Conta</a></li>
-                        <li><a href="{ url 'accounts:edit_password' %}">Editar Senha</a></li>
+                        <li><a href="{% url 'accounts:editar_usuario' %}">Editar Conta</a></li>
+                        <li><a href="{% url 'accounts:editar_senha' %}">Editar Senha</a></li>
                     </ul>
                 </div>
             </div>
