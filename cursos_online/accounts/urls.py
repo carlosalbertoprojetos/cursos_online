@@ -14,6 +14,7 @@ urlpatterns = [
     path('cadastrar/', views.CadastrarUsuarioView.as_view(), name='cadastrar_usuario'),
     path('editar/usuario/', views.editar_usuario, name='editar_usuario'),
     path('editar/senha/', views.editar_senha, name='editar_senha'),
+    path('resetar/senha/', views.resetar_senha, name='resetar_senha'),
 ]
 
 

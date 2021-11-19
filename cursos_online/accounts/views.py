@@ -1,12 +1,17 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
+from django.contrib.auth import get_user_model
 from django.shortcuts import redirect, render
 
 from django.urls import reverse_lazy
 from django.views import generic
-from .forms import CadastrarUsuarioForm, EditarUsuarioForm
 
+from .models import ResetarSenha
+from .forms import CadastrarUsuarioForm, EditarUsuarioForm, ResetarSenhaForm
+from .utils import generate_hash_key
+
+User = get_user_model()
 
 
 class CadastrarUsuarioView(generic.CreateView):
@@ -14,7 +19,20 @@ class CadastrarUsuarioView(generic.CreateView):
     template_name = 'accounts/cadastrar_usuario.html'
     success_url = reverse_lazy('accounts:login') 
 
-    
+
+def resetar_senha(request):
+    template_name = 'accounts/resetar_senha.html'
+    form = ResetarSenhaForm(request.POST or None)
+    context = {}
+    if form.is_valid():
+        user = User.objects.get(email=form.cleaned_data['email'])
+        key = generate_hash_key(user.username)
+        reset = ResetarSenha(key=key, user=user)
+        reset.save()
+        context['success'] = True
+    context['form'] = form    
+    return render(request, template_name, context)
+
 # def register(request):
 #     template_name = 'accounts/cadastro.html'
 #     form_class = CriarUsuariocomEmailForm

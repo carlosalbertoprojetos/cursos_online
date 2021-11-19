@@ -32,6 +32,20 @@ class CadastrarUsuarioForm(forms.ModelForm):
         return user
     
 
+class ResetarSenhaForm(forms.Form):
+    email = forms.EmailField(label='email')
+    
+
+    def clean_email(self):
+        """ 
+        validação - verificar se o email informado para cadastrado já existe
+        """
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            return email
+        raise forms.ValidationError(
+            'Nenhum usuário encontrado com este email.'
+        )
         
 
 # class CriarUsuariocomEmailForm(UserCreationForm):
@@ -55,7 +69,7 @@ class EditarUsuarioForm(forms.ModelForm):
  
     class Meta:
         model = User
-        fields = ['username', 'email'] 
+        fields = ['username', 'email', 'name'] 
 
 
 # class EditarUsuarioForm(forms.ModelForm):
