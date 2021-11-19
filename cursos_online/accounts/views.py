@@ -5,13 +5,13 @@ from django.shortcuts import redirect, render
 
 from django.urls import reverse_lazy
 from django.views import generic
-from .forms import CriarUsuariocomEmailForm, EditarUserForm
+from .forms import CadastrarUsuarioForm, EditarUsuarioForm
 
 
 
-class CadastrarView(generic.CreateView):
-    form_class = CriarUsuariocomEmailForm
-    template_name = 'accounts/cadastro.html'
+class CadastrarUsuarioView(generic.CreateView):
+    form_class = CadastrarUsuarioForm
+    template_name = 'accounts/cadastrar_usuario.html'
     success_url = reverse_lazy('accounts:login') 
 
     
@@ -43,13 +43,13 @@ def editar_usuario(request):
     template_name = 'accounts/editar_usuario.html'
     context = {}
     if request.method == 'POST':
-        form = EditarUserForm(request.POST, instance=request.user)
+        form = EditarUsuarioForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            form = EditarUserForm(instance=request.user)
+            form = EditarUsuarioForm(instance=request.user)
             context['success'] = True
     else:
-        form = EditarUserForm(instance=request.user)
+        form = EditarUsuarioForm(instance=request.user)
     context['form'] = form
     return render(request, template_name, context)
 
