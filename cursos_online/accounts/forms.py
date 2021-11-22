@@ -2,6 +2,10 @@ from django import forms
 from django.contrib.auth import get_user_model
 # from django.contrib.auth.forms import UserCreationForm
 
+from .models import ResetarSenha
+from .utils import generate_hash_key
+from .mail import send_email_template
+
 
 User = get_user_model()
 
@@ -33,20 +37,31 @@ class CadastrarUsuarioForm(forms.ModelForm):
     
 
 class ResetarSenhaForm(forms.Form):
-    email = forms.EmailField(label='email')
-    
+    email = forms.EmailField(label='email')    
 
     def clean_email(self):
         """ 
         validação - verificar se o email informado para cadastrado já existe
         """
-        email = self.cleaned_data.get('email')
+        email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
             return email
         raise forms.ValidationError(
             'Nenhum usuário encontrado com este email.'
         )
         
+    def save(self, commit=True):
+        user = User.objects.get(email=self.cleaned_data['email'])
+        key = generate_hash_key(user.username)
+        reset = ResetarSenha(key=key, user=user)
+        reset.save()
+        template_name = 'accounts/resetar_senha_email.html'
+        subject = 'Criar nova senha.'
+        context = {
+            'reset': reset,
+        }
+        send_email_template(subject, template_name, context, ['user.email'])
+
 
 # class CriarUsuariocomEmailForm(UserCreationForm):
 #     email = forms.EmailField(required=True, help_text='Campo obrigatório! Insira um email válido!')

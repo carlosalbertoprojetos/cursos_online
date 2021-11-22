@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm, UserCreationForm
 from django.contrib.auth import get_user_model
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
 from django.urls import reverse_lazy
 from django.views import generic
@@ -10,6 +10,7 @@ from django.views import generic
 from .models import ResetarSenha
 from .forms import CadastrarUsuarioForm, EditarUsuarioForm, ResetarSenhaForm
 from .utils import generate_hash_key
+
 
 User = get_user_model()
 
@@ -22,16 +23,26 @@ class CadastrarUsuarioView(generic.CreateView):
 
 def resetar_senha(request):
     template_name = 'accounts/resetar_senha.html'
-    form = ResetarSenhaForm(request.POST or None)
     context = {}
+    form = ResetarSenhaForm(request.POST or None)
     if form.is_valid():
-        user = User.objects.get(email=form.cleaned_data['email'])
-        key = generate_hash_key(user.username)
-        reset = ResetarSenha(key=key, user=user)
-        reset.save()
-        context['success'] = True
-    context['form'] = form    
+       form.save()
+       context['success'] = True
+    context ['form'] =  form
     return render(request, template_name, context)
+
+
+def confirmar_resetar_senha(request, key):
+    template_name = 'accounts/resetar_senha_confirmar.html'
+    context = {}
+    reset = get_object_or_404(ResetarSenha, key=key)
+    form = SetPasswordForm(user=reset.user, data=request.POST or None)
+    if form.is_valid():
+        form.save()
+        context['success'] = True
+    context['form'] = form
+    return render(request, template_name, context)
+
 
 # def register(request):
 #     template_name = 'accounts/cadastro.html'

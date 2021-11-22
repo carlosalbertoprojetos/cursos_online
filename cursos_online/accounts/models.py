@@ -4,6 +4,8 @@ from django.core import validators
 from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin,
     UserManager)
 from django.conf import settings
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         'Usuário', max_length=30, unique=True,
@@ -53,6 +55,8 @@ class ResetarSenha(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return '{0} - {1}'.format(self.user, self.created_at)
+        return '{0} em {1}'.format(self.user, self.created_at)
+    
+    
     
     
