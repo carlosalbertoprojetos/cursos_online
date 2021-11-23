@@ -12,11 +12,10 @@ class CursosManager(models.Manager):
             models.Q(name__icontains = query) | \
             models.Q(description__icontains = query)
         )
-# o models.Q() é uma espécie de filtro ( | sgnifica ou e & significa e)
+# o models.Q() é uma espécie de filtro ( | sgnifica 'OU' e & significa 'E')
 
 
 class Cursos(models.Model):
-
     nome = models.CharField('Nome', max_length = 100)
     slug = models.SlugField('Atalho')
     descricao = models.TextField('Descrição Simples', blank = True)
@@ -50,9 +49,39 @@ class Cursos(models.Model):
     
 
 
-# class Enrollment(models.Model):
+class Enrollment(models.Model):
     
-#     user = models.ForeignKey(
-#         settings.AUTH_USER_MODEL, verbose_name='Usuário', 
-#         related_name='enrollments')
-#     pass
+    STATUS_CHOICES = (
+        (0, 'Pendente'),
+        (1, 'Aprovado'),
+        (2, 'Cancelado'),
+        (3, 'Recusado'),
+    )
+    
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name='Usuário', 
+        related_name='enrollments', on_delete=models.DO_NOTHING
+    )
+    curso = models.ForeignKey(
+        Cursos, verbose_name='Curso', 
+        related_name='enrollments', on_delete=models.DO_NOTHING
+    )
+    status = models.ImageField('Situação', 
+        choices=STATUS_CHOICES, default=0, blank=True
+    )
+    created_at = models.DateTimeField('Criado em', auto_now_add = True)
+    updated_at = models.DateTimeField('Atualizado em ', auto_now_add = True)
+    
+    def active(self):
+        self.status = 1
+        self.save()
+    
+    class Meta:
+        verbose_name = 'Inscrição'
+        verbose_name_plural = 'Inscrições'
+        """ 
+        unique_together/unicidade - combina a unicidade entre cursos e usuário,
+        ou seja, cada usuário se increve apenas uma vez para cada curso.
+        """
+        unique_together = (('usuario', 'curso'),)
+    

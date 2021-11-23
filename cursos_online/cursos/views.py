@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 
 
-from .models import Cursos
+from .models import Cursos, Enrollment
 from .forms import FormContatoCurso
 
 
@@ -74,3 +74,19 @@ def contatoCursoView(request):
         'success':send
     }
     return render(request,'cursos/contato_curso.html',context)   
+
+
+
+@login_required
+def enrollment(request, slug):
+    curso = get_object_or_404(Cursos, slug=slug)
+    enrollment, created = Enrollment.objects.get_or_create(
+        usuario=request.user, 
+        curso=curso,
+    )
+    # if created:
+    #     enrollment.active()
+    return redirect('accounts:painel')
+
+
+
