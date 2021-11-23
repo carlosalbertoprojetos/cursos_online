@@ -172,9 +172,11 @@ a.pure-button-primary {
 .inner p {
     margin-top: 0;
 }
+
 ul.breadcrumb {
     padding: 0;
 }
+
 ul.breadcrumb li {
     display: inline-block;
 }

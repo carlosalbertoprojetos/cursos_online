@@ -1,7 +1,8 @@
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm, UserCreationForm
-from django.contrib.auth import get_user_model
 from django.shortcuts import redirect, render, get_object_or_404
 
 from django.urls import reverse_lazy
@@ -75,8 +76,10 @@ def editar_usuario(request):
         form = EditarUsuarioForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            form = EditarUsuarioForm(instance=request.user)
-            context['success'] = True
+            messages.success(request, 
+                'Dados alterados com sucesso!!!'
+                )
+            return redirect('accounts:painel')
     else:
         form = EditarUsuarioForm(instance=request.user)
     context['form'] = form
@@ -91,7 +94,10 @@ def editar_senha(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            context['success'] = True
+            messages.success(request, 
+                'Senha alterada com sucesso!!!'
+                )
+            return redirect('accounts:painel')
     else:
         form = PasswordChangeForm(user=request.user)
     context['form'] = form

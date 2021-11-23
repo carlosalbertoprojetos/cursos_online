@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 
@@ -84,8 +85,12 @@ def enrollment(request, slug):
         usuario=request.user, 
         curso=curso,
     )
-    # if created:
-    #     enrollment.active()
+    if created:
+        # enrollment.active()
+        messages.success(request, 'Inscrição realizada com sucesso!!!')
+    else:
+        messages.info(request, 'Usuário já inscrito neste curso.')
+        
     return redirect('accounts:painel')
 
 
