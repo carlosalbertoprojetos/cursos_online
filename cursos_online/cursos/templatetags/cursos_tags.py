@@ -4,6 +4,7 @@ register = Library()
 
 from cursos.models import Enrollment
 
+# faz com que todos os cursos sejam listados em todas as dependências referenciadas no dashboard
 @register.inclusion_tag('cursos/templatetags/meus_cursos.html')
 def meus_cursos(user):
     enrollments = Enrollment.objects.filter(usuario=user)
@@ -14,8 +15,8 @@ def meus_cursos(user):
 
 
 @register.simple_tag
-def load_meus_cursos(usuario):
-    return Enrollment.objects.filter(usuario=usuario)
+def load_meus_cursos(user):
+    return Enrollment.objects.filter(usuario=user)
     
 
 
