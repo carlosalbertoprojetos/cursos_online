@@ -1,0 +1,7 @@
+<li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Meus Cursos</li>
+{% for enrollment in enrollments %}
+<li><a href="#"><strong>{{ enrollment.curso }}</strong></a></li>
+{% empty %}
+<li style='padding: 5px 0 5px 15px;'>Não há inscrições</li>
+{% endfor %}
+

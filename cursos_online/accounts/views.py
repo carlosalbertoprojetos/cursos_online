@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .models import ResetarSenha
+from cursos.models import Enrollment
 from .forms import CadastrarUsuarioForm, EditarUsuarioForm, ResetarSenhaForm
 from .utils import generate_hash_key
 
@@ -65,7 +66,9 @@ def confirmar_resetar_senha(request, key):
 def painel(request):
     # template_name = 'accounts/painel.html'
     template_name = 'accounts/dashboard.html'
-    return render(request, template_name,)
+    context = {}
+    context['enrollments'] = Enrollment.objects.filter(usuario=request.user)
+    return render(request, template_name, context)
 
 
 @login_required
