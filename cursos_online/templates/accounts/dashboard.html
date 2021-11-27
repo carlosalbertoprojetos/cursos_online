@@ -25,19 +25,19 @@
                 <div class="pure-menu pure-menu-open">
                     <ul>
                         <li class="pure-menu-heading">
-                            Bem-vindo: <strong>{{ user }}</strong>
+                            Bem-vindo, <strong>{{ user }}</strong>
                         </li>
                         {% meus_cursos user %}
-                        <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Conta</li>
+                        <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Configurações de Conta</li>
                         <li>
                             <a href="{% url 'accounts:editar_usuario' %}">
-                            <i class="icon-cog"></i>
-                            Editar Dados
+                            <i class="fas fa-cog"></i>
+                            Editar Informações
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'accounts:editar_senha' %}">
-                            <i class="icon-lock"></i>
+                            <i class="fa-lock"></i>
                             Editar Senha</a>
                         </li>
                     </ul>
@@ -47,12 +47,25 @@
             <div class="pure-u-2-3">
                 <div class="card card-header" style = 'margin-left: auto; padding: 0px 15px'>
                     {% block dashboard_content %}
-                    <ul style="list-style-type: none; padding-left: 10px">
-                    <li><strong>Usuário</strong>: {{ user }}</li>
-                    <li><strong>E-mail</strong>: {{ user.email }}</li>
-                    <li><strong>Primeiro nome</strong>: {{ user.first_name }}</li>
-                    <li><strong>Segundo nome</strong>: {{ user.last_name }}</li>
-                    </ul>
+                    <h2 class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</h2>
+                    {% for enrollment in enrollments %}
+                    <div class="well">
+                        <h3>{{ enrollment.curso }} 
+                        <!-- Filtros alinhados -->
+                        ({{ enrollment.curso.start_date|date:'d/m/Y'|default:'Sem data' }})
+                        </h3>
+                        {{ enrollment.curso.descricao }}
+                        <div class="pure-controls">
+                            <a href="" class="pure-button pure-button-primary">Acessar</a>
+                            <a href="" class="pure-button pure-button-error">Cancelar</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <aside class=pure-u-1>
+                        <p style='padding: 5px 0 5px 15px;'>Não há inscrições</p>
+                    </aside>:
+                    
+                    {% endfor %}
                     {% endblock %}
                 </div>
             </div>
