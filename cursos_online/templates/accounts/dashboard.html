@@ -24,16 +24,22 @@
             <div class="pure-u-1-3">
                 <div class="pure-menu pure-menu-open">
                     <ul>
-                        {% load_meus_cursos user as enrollment %}
-                        <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Meus Cursos</li>
-                        {% for enrollment in enrollments %}
-                        <li><a href="#"><strong>{{ enrollment.curso }}</strong></a></li>
-                        {% empty %}
-                        <li style='padding: 5px 0 5px 15px;'>Não há inscrições</li>
-                        {% endfor %}
-                        <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Minha Conta</li>
-                        <li><a href="{% url 'accounts:editar_usuario' %}">Editar Conta</a></li>
-                        <li><a href="{% url 'accounts:editar_senha' %}">Editar Senha</a></li>
+                        <li class="pure-menu-heading">
+                            Bem-vindo: <strong>{{ user }}</strong>
+                        </li>
+                        {% meus_cursos user %}
+                        <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Conta</li>
+                        <li>
+                            <a href="{% url 'accounts:editar_usuario' %}">
+                            <i class="icon-cog"></i>
+                            Editar Dados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'accounts:editar_senha' %}">
+                            <i class="icon-lock"></i>
+                            Editar Senha</a>
+                        </li>
                     </ul>
                 </div>
                 <br>

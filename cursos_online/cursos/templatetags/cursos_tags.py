@@ -2,6 +2,7 @@ from django.template import Library
 
 register = Library()
 
+
 from cursos.models import Enrollment
 
 # faz com que todos os cursos sejam listados em todas as dependências referenciadas no dashboard
@@ -14,9 +15,8 @@ def meus_cursos(user):
     return context
 
 
-@register.simple_tag
-def load_meus_cursos(user):
-    return Enrollment.objects.filter(usuario=user)
+
+
     
 
 
