@@ -86,12 +86,30 @@ def enrollment(request, slug):
         curso=curso,
     )
     if created:
-        # enrollment.active()
+        enrollment.ativo()
         messages.success(request, 'Inscrição realizada com sucesso!!!')
     else:
         messages.info(request, 'Usuário já inscrito neste curso.')
-        
     return redirect('accounts:painel')
 
+
+
+@login_required
+def anuncios(request, slug):
+    curso = get_object_or_404(Cursos, slug=slug)
+    if not request.user.is_staff:
+        enrollment = get_object_or_404(
+            Enrollment,
+            usuario = request.user,
+            curso = curso
+        )
+        if not enrollment.aprovado():
+            messages.error(request, 'A sua inscrição está pendente')
+            return redirect('accounts:painel')
+    template_name = 'cursos/anuncios.html'
+    context = {
+        'curso': curso,
+    }
+    return render(request, template_name, context)
 
 

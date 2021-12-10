@@ -67,7 +67,7 @@ def painel(request):
     # template_name = 'accounts/painel.html'
     template_name = 'accounts/dashboard.html'
     context = {}
-    context['enrollments'] = Enrollment.objects.filter(usuario=request.user)
+    # context['enrollments'] = Enrollment.objects.filter(usuario=request.user)
     return render(request, template_name, context)
 
 

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% load cursos_tags %}
 
 {% block content %}
@@ -9,7 +10,7 @@
     <div class="breadcrumb pure-u-1">
         {% for message in messages %}
         <p>{{ message }}</p>
-        {%endfor %}
+        {% endfor %}
     </div>
     {% endif %}    
     <div class="">
@@ -27,47 +28,62 @@
                         <li class="pure-menu-heading">
                             Bem-vindo, <strong>{{ user }}</strong>
                         </li>
+                        {% block menu_options %}
                         {% meus_cursos user %}
+                        <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</li>
+                        {% for enrollment in enrollments %}
+                        <li>
+                            <a href="{% url 'cursos:anuncios' enrollment.curso.slug %}">
+                                <img src="{% static 'icons/book.svg' %}" alt="">
+                                <strong>{{ enrollment.curso }}</strong>
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li style='padding: 5px 0 5px 15px;'>Não há inscrições</li>
+                        {% endfor %}
                         <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Configurações de Conta</li>
                         <li>
                             <a href="{% url 'accounts:editar_usuario' %}">
-                            <i class="fas fa-cog"></i>
-                            Editar Informações
+                                <img src="{% static 'icons/gear-fill.svg' %}" alt="">
+                                Editar Informações
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'accounts:editar_senha' %}">
-                            <i class="fa-lock"></i>
-                            Editar Senha</a>
-                        </li>
+                                <img src="{% static 'icons/shield-lock-fill.svg' %}" alt="">
+                                Editar Senha</a>
+                            </li>
+                        {% endblock menu_options %}
                     </ul>
                 </div>
                 <br>
             </div>
             <br>
             <div class="pure-u-2-3">
-                <div class="card card-header" style = 'margin-left: auto; padding: 0px 15px; margin-left: 2px;'>
+                <div class="card " style = 'margin-left: 2px;'>
+                    <div class="card-header">
                     {% block dashboard_content %}
-                    <h2 class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</h2>
-                    {% for enrollment in enrollments %}
-                    <div class="well">
-                        <h3>{{ enrollment.curso }} 
-                        <!-- Filtros alinhados -->
-                        ({{ enrollment.curso.start_date|date:'d/m/Y'|default:'Sem data' }})
-                        </h3>
-                        {{ enrollment.curso.descricao }}
-                        <div class="pure-controls">
-                            <a href="" class="pure-button pure-button-primary">Acessar</a>
-                            <a href="" class="pure-button pure-button-error">Cancelar</a>
+                        <h2 class="font-weight-bold pure-menu-heading" style='margin: 5px;'>Cursos</h2>
+                        {% for enrollment in enrollments %}
+                        <div class="well">
+                            <h3>{{ enrollment.curso }} 
+                            <!-- Filtros alinhados -->
+                            ({{ enrollment.curso.start_date|date:'d/m/Y'|default:'Sem data' }})
+                            </h3>
+                            {{ enrollment.curso.descricao | truncatechars:"200" }}
+                            <div class="pure-controls">
+                                <a href="" class="pure-button pure-button-primary">Acessar</a>
+                                <a href="" class="pure-button pure-button-error">Cancelar</a>
+                            </div>
                         </div>
+                        {% empty %}
+                        <aside class=pure-u-1>
+                            <p style='padding: 5px 0 5px 15px;'>Não há inscrições</p>
+                        </aside>:
+                        
+                        {% endfor %}
+                        {% endblock %}
                     </div>
-                    {% empty %}
-                    <aside class=pure-u-1>
-                        <p style='padding: 5px 0 5px 15px;'>Não há inscrições</p>
-                    </aside>:
-                    
-                    {% endfor %}
-                    {% endblock %}
                 </div>
             </div>
         </div>
@@ -75,5 +91,5 @@
 </div>
 
 
-{% endblock %}
+{% endblock content %}
 

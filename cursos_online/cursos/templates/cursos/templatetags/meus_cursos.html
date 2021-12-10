@@ -1,8 +1,9 @@
+{% load static %}
 <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</li>
 {% for enrollment in enrollments %}
 <li>
-    <a href="#">
-        <i class="fa-book"></i>
+    <a href="{% url 'cursos:anuncios' enrollment.curso.slug %}">
+        <img src="{% static 'icons/book.svg' %}" alt="">
         <strong>{{ enrollment.curso }}</strong>
     </a>
 </li>

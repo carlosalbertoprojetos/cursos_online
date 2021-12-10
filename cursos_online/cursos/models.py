@@ -72,9 +72,12 @@ class Enrollment(models.Model):
     created_at = models.DateTimeField('Criado em', auto_now_add = True)
     updated_at = models.DateTimeField('Atualizado em ', auto_now_add = True)
     
-    def active(self):
+    def ativo(self):
         self.status = 1
         self.save()
+
+    def aprovado(self):
+        return self.status == 1
     
     class Meta:
         verbose_name = 'Inscrição'
