@@ -10,8 +10,13 @@ from cursos.models import Enrollment
 def meus_cursos(user):
     enrollments = Enrollment.objects.filter(usuario=user)
     context = {
-        'enrollments': enrollments
+        'enrollments': enrollments,
     }
     return context
+
+
+@register.simple_tag
+def listar_meus_cursos(user):
+    return Enrollment.objects.filter(usuario=user)
 
 

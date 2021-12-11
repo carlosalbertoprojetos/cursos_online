@@ -9,7 +9,7 @@
     {% if messages %}
     <div class="breadcrumb pure-u-1">
         {% for message in messages %}
-        <p>{{ message }}</p>
+        <p>{{ message }}</p> 
         {% endfor %}
     </div>
     {% endif %}    
@@ -28,8 +28,7 @@
                         <li class="pure-menu-heading">
                             Bem-vindo, <strong>{{ user }}</strong>
                         </li>
-                        {% block menu_options %}
-                        {% meus_cursos user %}
+                        {% listar_meus_cursos user as enrollments %}
                         <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</li>
                         {% for enrollment in enrollments %}
                         <li>
@@ -37,7 +36,7 @@
                                 <img src="{% static 'icons/book.svg' %}" alt="">
                                 <strong>{{ enrollment.curso }}</strong>
                             </a>
-                        </li>
+                        </li> 
                         {% empty %}
                         <li style='padding: 5px 0 5px 15px;'>Não há inscrições</li>
                         {% endfor %}
@@ -45,7 +44,7 @@
                         <li>
                             <a href="{% url 'accounts:editar_usuario' %}">
                                 <img src="{% static 'icons/gear-fill.svg' %}" alt="">
-                                Editar Informações
+                                Editar Conta
                             </a>
                         </li>
                         <li>
@@ -53,7 +52,7 @@
                                 <img src="{% static 'icons/shield-lock-fill.svg' %}" alt="">
                                 Editar Senha</a>
                             </li>
-                        {% endblock menu_options %}
+
                     </ul>
                 </div>
                 <br>
