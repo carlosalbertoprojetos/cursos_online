@@ -4,27 +4,28 @@
 
 {% block menu_options %}
 <li class="pure-menu-heading">
+    <strong>{{ curso }}</strong>
     <li>
         <a href="#">
-            <i>camera</i>
+            <img src="{% static 'icons/camera-video-fill.svg' %}" alt="" style="margin-right: 4px;">
             Aulas e Materiais
         </a>
     </li>
     <li>
         <a href="#">
-            <i>circulo</i>
+            <img src="{% static 'icons/exclamation-circle-fill.svg' %}" alt="" style="margin-right: 4px;">
             Informações
         </a>
     </li>
     <li>
         <a href="#">
-            <i>envelope</i>
+            <img src="{% static 'icons/envelope-fill.svg' %}" alt="" style="margin-right: 4px;">
             Anúncios
         </a>
     </li>
     <li>
         <a href="#">
-            <i>comentarios</i>
+            <img src="{% static 'icons/chat-dots-fill.svg' %}" alt="" style="margin-right: 4px;">
             Fórum de dúvidas
         </a>
     </li>
@@ -33,28 +34,23 @@
 
 {% endblock menu_options %}
 
-
 {% block dashboard_content %}
 <div class="container" style="padding: 0px;">
-    <div class="card " style = 'margin-left: 2px;'>
-        <div class="card-header">
-            <div class="">
-                <h2>Início das aulas, sejam bem vindos!</h2>
-                <p>Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-                </p>
-                <p><a href="#coments"></a>
-                    <img src="{% static 'icons/chat-left-text-fill.svg' %}">
-                </p>
-            </div>
-            <div class="">
-                <h2>Início 2, sejam bem vindos!</h2>
-                <p>Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-                </p>
-                <p><a href="#coments"></a>
-                    <img src="{% static 'icons/chat-left-text-fill.svg' %}">
-                </p>
-            </div>
-        </div>
+    <div class="card" style="padding: 4px 4px 4px 10px; margin-bottom: 10px;">
+        <h2>Início das aulas, sejam bem vindos!</h2>
+        <p>Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+        </p>
+        <p><a href="#coments"></a>
+            <img src="{% static 'icons/chat-left-text-fill.svg' %}">
+        </p>
+    </div><br>
+    <div class="card" style="padding: 4px 4px 4px 10px; margin-bottom: 10px;">
+        <h2>Início 2, sejam bem vindos!</h2>
+        <p>Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+        </p>
+        <p><a href="#coments"></a>
+            <img src="{% static 'icons/chat-left-text-fill.svg' %}">
+        </p>
     </div>
 </div>
 

@@ -28,12 +28,13 @@
                         <li class="pure-menu-heading">
                             Bem-vindo, <strong>{{ user }}</strong>
                         </li>
+                        {% block menu_options %}
                         {% listar_meus_cursos user as enrollments %}
                         <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</li>
                         {% for enrollment in enrollments %}
                         <li>
                             <a href="{% url 'cursos:anuncios' enrollment.curso.slug %}">
-                                <img src="{% static 'icons/book.svg' %}" alt="">
+                                <img src="{% static 'icons/journal-bookmark-fill.svg' %}" alt="">
                                 <strong>{{ enrollment.curso }}</strong>
                             </a>
                         </li> 
@@ -49,22 +50,21 @@
                         </li>
                         <li>
                             <a href="{% url 'accounts:editar_senha' %}">
-                                <img src="{% static 'icons/shield-lock-fill.svg' %}" alt="">
-                                Editar Senha</a>
-                            </li>
-
+                            <img src="{% static 'icons/shield-lock-fill.svg' %}" alt="">
+                            Editar Senha</a>
+                        </li>
+                        {% endblock menu_options %}
                     </ul>
-                </div>
-                <br>
+                </div><br>
             </div>
             <br>
             <div class="pure-u-2-3">
-                <div class="card " style = 'margin-left: 2px;'>
+                <div class="card" style = 'margin-left: 2px;'>
                     <div class="card-header">
                     {% block dashboard_content %}
                         <h2 class="font-weight-bold pure-menu-heading" style='margin: 5px;'>Cursos</h2>
                         {% for enrollment in enrollments %}
-                        <div class="well">
+                        <div class="card" style="padding: 4px 4px 4px 10px; margin-bottom: 10px;"> 
                             <h3>{{ enrollment.curso }} 
                             <!-- Filtros alinhados -->
                             ({{ enrollment.curso.start_date|date:'d/m/Y'|default:'Sem data' }})
@@ -78,8 +78,7 @@
                         {% empty %}
                         <aside class=pure-u-1>
                             <p style='padding: 5px 0 5px 15px;'>Não há inscrições</p>
-                        </aside>:
-                        
+                        </aside>:                        
                         {% endfor %}
                         {% endblock %}
                     </div>

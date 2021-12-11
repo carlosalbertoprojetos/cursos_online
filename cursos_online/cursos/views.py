@@ -77,7 +77,6 @@ def contatoCursoView(request):
     return render(request,'cursos/contato_curso.html',context)   
 
 
-
 @login_required
 def enrollment(request, slug):
     curso = get_object_or_404(Cursos, slug=slug)
@@ -91,7 +90,6 @@ def enrollment(request, slug):
     else:
         messages.info(request, 'Usuário já inscrito neste curso.')
     return redirect('accounts:painel')
-
 
 
 @login_required
@@ -108,7 +106,7 @@ def anuncios(request, slug):
             return redirect('accounts:painel')
     template_name = 'cursos/anuncios.html'
     context = {
-        'curso': curso,
+        'curso': curso
     }
     return render(request, template_name, context)
 
