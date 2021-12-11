@@ -4,7 +4,7 @@
 {% load cursos_tags %}
 
 {% block content %}
-
+{% listar_meus_cursos user as enrollments %}
 <div class="card-header" style='padding: 10px;'>
     {% if messages %}
     <div class="breadcrumb pure-u-1">
@@ -29,7 +29,7 @@
                             Bem-vindo, <strong>{{ user }}</strong>
                         </li>
                         {% block menu_options %}
-                        {% listar_meus_cursos user as enrollments %}
+
                         <li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</li>
                         {% for enrollment in enrollments %}
                         <li>
