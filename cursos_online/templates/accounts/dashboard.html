@@ -71,14 +71,14 @@
                             </h3>
                             {{ enrollment.curso.descricao | truncatechars:"200" }}
                             <div class="pure-controls">
-                                <a href="" class="pure-button pure-button-primary">Acessar</a>
-                                <a href="" class="pure-button pure-button-error">Cancelar</a>
+                                <a href="{% url 'cursos:anuncios' enrollment.curso.slug %}" class="pure-button pure-button-primary">Acessar</a>
+                                <a href="{% url 'cursos:cancelar_enrollment' enrollment.curso.slug %}" class="pure-button button-error">Cancelar</a>
                             </div>
                         </div>
                         {% empty %}
                         <aside class=pure-u-1>
                             <p style='padding: 5px 0 5px 15px;'>Não há inscrições</p>
-                        </aside>:                        
+                        </aside>
                         {% endfor %}
                         {% endblock %}
                     </div>

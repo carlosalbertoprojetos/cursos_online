@@ -1,0 +1,42 @@
+{% extends "accounts/dashboard.html" %}
+
+{% load static %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li style='margin: 5px;'>>></li>
+    <li><a>{{ curso }}</a></li>
+{% endblock %}
+
+{% block menu_options %}
+<li class="pure-menu-heading">
+    <img src="{% static 'icons/arrow-right-square-fill.svg' %}" alt="" style="margin-right: 4px;">
+    <strong>{{ curso }}</strong>
+    <li>
+        <a href="#">
+            <img src="{% static 'icons/camera-video-fill.svg' %}" alt="" style="margin-right: 4px;">
+            Aulas e Materiais
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <img src="{% static 'icons/exclamation-circle-fill.svg' %}" alt="" style="margin-right: 4px;">
+            Informações
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <img src="{% static 'icons/envelope-fill.svg' %}" alt="" style="margin-right: 4px;">
+            Anúncios
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <img src="{% static 'icons/chat-dots-fill.svg' %}" alt="" style="margin-right: 4px;">
+            Fórum de dúvidas
+        </a>
+    </li>
+</li>
+{{ block.super }}
+
+{% endblock menu_options %}

@@ -20,15 +20,15 @@ class Cursos(models.Model):
     slug = models.SlugField('Atalho')
     descricao = models.TextField('Descrição Simples', blank = True)
     sobre = models.TextField('Sobre o Curso', blank = True)
-    start_date = models.DateField(
+    data_inicial = models.DateField(
         'Data de início', null = True, blank = True, 
-        )
+    )
     imagem = models.ImageField(
         upload_to = 'cursos/imagens', verbose_name = 'Imagem',
         null = True, blank = True
-        )
-    created_at = models.DateTimeField('Criado em', auto_now_add = True)
-    updated_at = models.DateTimeField('Atualizado em ', auto_now_add = True)
+    )
+    criado_em = models.DateTimeField('Criado em', auto_now_add = True)
+    atualizado_em = models.DateTimeField('Atualizado em ', auto_now_add = True)
     
     objects = CursosManager()
 
@@ -59,25 +59,24 @@ class Enrollment(models.Model):
     )
     
     usuario = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name='Usuário', 
-        related_name='enrollments', on_delete=models.DO_NOTHING
+        settings.AUTH_USER_MODEL, 
+        verbose_name='Usuário', 
+        related_name='enrollments', 
+        on_delete=models.DO_NOTHING
     )
     curso = models.ForeignKey(
         Cursos, verbose_name='Curso', 
-        related_name='enrollments', on_delete=models.DO_NOTHING
+        related_name='enrollments', 
+        on_delete=models.DO_NOTHING
     )
-    status = models.ImageField('Situação', 
-        choices=STATUS_CHOICES, default=0, blank=True
+    status = models.ImageField(
+        'Situação', 
+        choices=STATUS_CHOICES, 
+        default=0, 
+        blank=True
     )
-    created_at = models.DateTimeField('Criado em', auto_now_add = True)
-    updated_at = models.DateTimeField('Atualizado em ', auto_now_add = True)
-    
-    def ativo(self):
-        self.status = 1
-        self.save()
-
-    def aprovado(self):
-        return self.status == 1
+    criado_em = models.DateTimeField('Criado em', auto_now_add = True)
+    atualizado_em = models.DateTimeField('Atualizado em ', auto_now_add = True)
     
     class Meta:
         verbose_name = 'Inscrição'
@@ -88,3 +87,55 @@ class Enrollment(models.Model):
         """
         unique_together = (('usuario', 'curso'),)
     
+    def ativo(self):
+        self.status = 1
+        self.save()
+
+    def aprovado(self):
+        return self.status == 1
+    
+    def __str__(self):
+        return self.usuario
+    
+
+class Anuncios(models.Model):
+    curso = models.ForeignKey(
+        Cursos, 
+        verbose_name='Curso', 
+        on_delete=models.DO_NOTHING
+    )
+    titulo = models.CharField('Título', max_length=100)
+    conteudo = models.TextField('Conteúdo', blank=True)
+    
+    criado_em = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado_em = models.DateTimeField('Atualizado em', auto_now_add=True)
+    
+    def __str__(self):
+        return self.titulo
+    
+    class Meta:
+        verbose_name = 'Anúncio'
+        verbose_name_plural = 'Anúncios'
+        ordering = ['-criado_em']
+        
+
+class Comentarios(models.Model):
+    anuncios = models.ForeignKey(
+        Anuncios, verbose_name='Anúncio', related_name='Comentários',
+        on_delete=models.DO_NOTHING
+    )
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        verbose_name='Usuário', 
+        on_delete=models.DO_NOTHING
+    )
+    comentario = models.TextField('Comentário', blank=True)
+    
+    criado_em = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado_em = models.DateTimeField('Atualizado em', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Comentário'
+        verbose_name_plural = 'Comentários'
+        ordering = ['-criado_em']
+
