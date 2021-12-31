@@ -2,6 +2,7 @@ from django import forms
 from django.core.mail import send_mail
 from django.conf import settings
 
+from .models import Comentarios
 
 class FormContatoCurso(forms.Form):
     nome = forms.CharField(label="Nome", widget=forms.TextInput())
@@ -24,5 +25,10 @@ class FormContatoCurso(forms.Form):
 
 
 
+class ComentariosForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comentarios
+        fields = ('comentario',)
 
-
+    

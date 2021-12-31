@@ -3,25 +3,34 @@
 {% load static %}
 
 {% block dashboard_content %}
+
+{% for anuncio in anuncios %}
 <div class="container" style="padding: 0px;">
-    <div class="card" style="padding: 4px 4px 4px 10px; margin-bottom: 10px;">
-        <h2>Início das aulas, sejam bem vindos!</h2>
-        <p>Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-        </p>
-        <p><a href="#coments"></a>
-            <img src="{% static 'icons/chat-left-text-fill.svg' %}">
-        </p>
-    </div><br>
-    <div class="card" style="padding: 4px 4px 4px 10px; margin-bottom: 10px;">
-        <h2>Início 2, sejam bem vindos!</h2>
-        <p>Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem ipsum dolor sit amet Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-        </p>
-        <p><a href="#coments"></a>
-            <img src="{% static 'icons/chat-left-text-fill.svg' %}">
-        </p>
+    <div class="card" style="padding: 0px 10px; margin-bottom: 10px;">
+        <h2>
+            <a href="{% url 'cursos:anuncio' curso.slug anuncio.pk %}">{{ anuncio }}</a>
+        </h2>
+        {{ anuncio.conteudo|linebreaks }}
+        <p><a href="{% url 'cursos:anuncio' curso.slug anuncio.pk %}#comments">
+                <!-- with - serve para realizar ações, para que determinada variável possa ser usada em determinado bloco e evitar repetições desnecessárias -->
+                {% with comentario=anuncio.comentarios.count %}
+                {% if comentario > 0 %}
+                <h5 style="margin: 0"><img src="{% static 'icons/chat-dots-fill.svg' %}">
+                    {{ comentario }} Comentário{{ comentario|pluralize }}</h5>
+                {% else %}
+                <h5 style="margin: 0"><img src="{% static 'icons/chat.svg' %}">
+                    {{ comentario }} Comentário</h5>
+                {% endif %}
+                {% endwith %}
+            </a></p>
     </div>
 </div>
-
+{% empty %}
+<div class="container" style="padding: 0px;">
+    <div class="card" style="padding: 0px 10px; margin-bottom: 10px;">
+    <h2>Nenhum anúncio criado.</h2>
+    </div>
+</div>
+{% endfor %}
 {% endblock dashboard_content %}
-
 

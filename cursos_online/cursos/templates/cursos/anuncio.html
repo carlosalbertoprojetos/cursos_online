@@ -1,0 +1,58 @@
+{% extends "cursos/cursos_dashboard.html" %}
+
+{% load static %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li style='margin: 5px;'>>></li>
+    <li><a>{{ anuncio }}</a></li>
+{% endblock %}
+
+{% block dashboard_content %}
+
+    <div class="container" style="padding: 0px;">
+        <div class="card" style="padding: 0px 10px; margin-bottom: 10px;">
+            <h2>{{ anuncio }}</h2>
+            {{ anuncio.conteudo|linebreaks }}
+        </div>
+    </div>
+
+    <div class="container" style="padding: 0px;">
+        <div class="card" style="padding: 0px 10px; margin-bottom: 10px;">
+            <h4 id="id_comentario">Comentários
+            <a href="#add_coment" class="fight">comentar</a></h4>
+            <hr>
+            <!-- comentarios é o relatad_name do model -->
+            {% for coment in anuncio.comentarios.all %}
+                <p>
+                    <strong>{{ coment.usuario }}</strong> disse à {{ coment.criado_em|timesince }} atrás: <br/>
+                    {{ coment.comentario|linebreaksbr }}
+                </p>
+                <hr>
+                {% empty %}
+                <p>
+                    Nenhum comentário para este anúncio. 
+                </p>
+            {% endfor %}
+            <form method="post" action="" class="pure-form pure-form-stacked" id="add_comment">
+                {% csrf_token %}
+                <fieldset>
+                    {% for field in form%}
+                    <div class="pure-control-group">
+                        {{ form.non_field_errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                    <div class="pure-controls">
+                        <button class="pure-button pure-button-primary">Enviar</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+{% endblock dashboard_content %}
+
+
