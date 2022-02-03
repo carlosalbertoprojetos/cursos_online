@@ -21,12 +21,17 @@ a {
     margin: 0 0;
 }
 .header .pure-menu {
-    padding: 0.5em;
+    padding: 0.5em 0.2em;
     background-color: #2d3e50;
 }
 .header .pure-menu a {
     color: #fff;
 }
+
+.pure-menu li a {
+    padding-left: 0.5em;
+}
+
 .header .pure-menu li a:hover,
 .header .pure-menu li a:focus {
     background: none;
@@ -54,7 +59,7 @@ a {
 .home-menu .pure-menu-heading {
     color: white;
     font-weight: 400;
-    font-size: 120%;
+    font-size: 70%;
 }
 
 .home-menu .pure-menu-selected a {
@@ -92,6 +97,12 @@ body .primary-button {
 .splash .primary-button {
     font-size: 150%;
 }
+
+.carddash {
+    margin: 40px;
+    width: 70%;
+}
+
 .content .content-subhead {
     color: #999;
     padding-bottom: 0.3em;

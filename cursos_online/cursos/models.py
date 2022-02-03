@@ -1,7 +1,7 @@
+from accounts.mail import send_email_template
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from django.utils import timezone
 
 
 class CursosManager(models.Manager):
@@ -140,3 +140,28 @@ class Comentarios(models.Model):
 
     def __str__(self):
         return str(self.anuncio.curso)
+
+# ao registrar novo curso um email é disparado aos alunos cadastrados
+
+
+def post_save_anuncio(instance, created, **kwargs):
+    if created:
+        subject = instance.titulo
+        context = {
+            'anuncio': instance
+        }
+        template_name = 'cursos/anuncio_email.html'
+        enrollments = Enrollment.objects.filter(
+            curso=instance.curso,
+            status=1
+        )
+        for enrollment in enrollments:
+            recipient_list = [enrollment.usuario.email]
+            send_email_template(subject, template_name,
+                                context, recipient_list)
+
+
+models.signals.post_save.connect(
+    receiver=post_save_anuncio, sender=Anuncios,
+    dispatch_uid='envio_anuncio_email'
+)

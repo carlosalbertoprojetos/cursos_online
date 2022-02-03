@@ -30,7 +30,7 @@ def detalhes_CursoView(request, slug):
     curso = get_object_or_404(Cursos, slug=slug)
     context = {}
     if request.method == 'POST':
-        form = FormContatoCurso(request.POST)
+        form = FormContatoCurso(request.POST, request.FILES)
         if form.is_valid():
             context['is_valid'] = True  # aciona a mensagem
             form.send_email(curso)

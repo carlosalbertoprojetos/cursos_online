@@ -1,5 +1,5 @@
 {% load static %}
-<li class="font-weight-bold pure-menu-heading" style='margin-top: 0; background-color:rgba(0,0,0,.03);'>Cursos</li>
+<li class="font-weight-bold pure-menu-heading mt-0" style=" background-color:rgba(0,0,0,.03);">Cursos</li>
 {% for enrollment in enrollments %}
 <li>
     <a href="{% url 'cursos:anuncios' enrollment.curso.slug %}">

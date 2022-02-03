@@ -24,8 +24,10 @@
             <hr>
             <!-- comentarios é o relatad_name do model -->
             {% for coment in anuncio.comentarios.all %}
-                <p>
-                    <strong>{{ coment.usuario }}</strong> disse à {{ coment.criado_em|timesince }} atrás: <br/>
+                <p class="mb-1">
+                    <strong>{{ coment.usuario }}</strong> comentou à {{ coment.criado_em|timesince }} atrás: <br/>
+                </p>
+                <p class="mt-1">
                     {{ coment.comentario|linebreaksbr }}
                 </p>
                 <hr>

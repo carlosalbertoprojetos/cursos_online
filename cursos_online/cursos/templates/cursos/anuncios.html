@@ -5,7 +5,7 @@
 {% block dashboard_content %}
 
 {% for anuncio in anuncios %}
-<div class="container" style="padding: 0px;">
+<div class="container p-0">
     <div class="card" style="padding: 0px 10px; margin-bottom: 10px;">
         <h2>
             <a href="{% url 'cursos:anuncio' curso.slug anuncio.pk %}">{{ anuncio }}</a>
