@@ -30,7 +30,7 @@
                         </li>
                         {% block menu_options %}
 
-                        <li class="card card-header p-2"><strong>Cursos</strong></li>
+                        <li class="card card-header p-2"><strong>Cursos Inscrito</strong></li>
                         {% for enrollment in enrollments %}
                         <li>
                             <a href="{% url 'cursos:anuncios' enrollment.curso.slug %}">

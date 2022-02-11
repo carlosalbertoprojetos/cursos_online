@@ -1,0 +1,58 @@
+{% extends "cursos/cursos_dashboard.html" %}
+
+{% load static %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li style='margin: 5px;'>>></li>
+    <li><a href="{% url 'cursos:aulas' curso.slug %}" >Aulas</a></li>
+    <li style='margin: 5px;'>>></li>
+    <li><a href="{% url 'cursos:aula' curso.slug aula.pk %}" >{{ aula }}</a></li>
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="well">
+    <h2><a href="{% url 'cursos:aula' curso.slug aula.pk %}" >{{ aula }}</a></h2>
+    {{ aula.descricao|linebreaks }}
+    <p>
+        <h4>Material da Aula</h4>
+        <table class="pure-table full">
+            <thead>
+                <tr>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Ação
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for material in aula.material.all %}
+                <tr calss="{% cycle '' 'pure-table-odd' %}">
+                    <td>
+                        {{ material }}
+                    </td>
+                    <td>
+                        {% if material.is_embutido %}
+                        <a href="{% url 'cursos:material' curso.slug material.pk %}">
+                            <i class="fa fa-video-camera"></i>
+                            Acessar
+                        </a>
+                        {% else %}
+                        <a target="_blank" href="{{ material.files.url }}">
+                            <i class="fa fa-download"></i>
+                            Baixar
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </p>
+</div>
+
+
+{% endblock %}

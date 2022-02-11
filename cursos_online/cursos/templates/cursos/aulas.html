@@ -1,0 +1,38 @@
+{% extends "cursos/cursos_dashboard.html" %}
+
+{% load static %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li style='margin: 5px;'>>></li>
+    <li><a href="{% url 'cursos:aulas' curso.slug %}" >Aulas</a></li>
+{% endblock %}
+
+{% block dashboard_content %}
+
+{% for aula in curso.aulas_disponiveis %}
+
+<div class="well">
+    <h2><a href="{% url 'cursos:aula' curso.slug aula.pk %}">{{ aula }}</a></h2>
+    <p>
+        {{ aula.descricao|truncatewords:'20' }}
+        <br />
+        <a href="{% url 'cursos:aula' curso.slug aula.pk %}" title="">
+            <i class="fa-solid fa-eye"></i>
+            Acessar Aula
+        </a>
+    </p>
+</div>
+
+{% empty %}
+
+<div class="well">
+    <h2>
+        Nenhuma aula disponível.
+    </h2>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

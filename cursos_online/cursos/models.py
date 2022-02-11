@@ -1,7 +1,11 @@
+from datetime import timezone
+
 from accounts.mail import send_email_template
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
+
 
 
 class CursosManager(models.Manager):
@@ -37,14 +41,63 @@ class Cursos(models.Model):
     def get_absolute_url(self):
         return reverse('cursos:detalhes_curso', args=[self.slug])
 
-    # def release_lessons(self):
-    #     today = timezone.now().date()
-    #     return self.lessons.filter(release_date__gte = today)
+    def aulas_disponiveis(self):
+        hoje = timezone.now().date()
+        return self.aula.filter(inicio__lte=hoje)
 
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
         ordering = ['nome']  # ['-name'] ordem decrescente
+
+
+class Aulas(models.Model):
+    curso = models.ForeignKey(
+        Cursos, verbose_name='Curso', related_name='aula', on_delete=models.DO_NOTHING)
+    nome = models.CharField('Nome', max_length=100)
+    descricao = models.TextField('Descrição', blank=True)
+    numero = models.IntegerField('Número (ordem)', blank=True, default=0)
+    inicio = models.DateField('Disponível em', blank=True, null=True)
+
+    criado_em = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado_em = models.DateTimeField('Atualizado em', auto_now_add=True)
+
+    def __str__(self):
+        return self.nome
+
+    # verifica se a aula foi disponibilizada - se seu início é >= a hoje
+    def is_disponivel(self):
+        if self.inicio:
+            hoje = timezone.now().date()
+            return self.inicio >= hoje
+        return False
+
+    class Meta:
+        verbose_name = 'Aula'
+        verbose_name_plural = 'Aulas'
+        ordering = ['-numero']
+
+
+class Materiais(models.Model):
+    aula = models.ForeignKey(
+        Aulas, verbose_name='Aulas', related_name='material', on_delete=models.DO_NOTHING)
+    nome = models.CharField('Nome', max_length=100)
+    embutido = models.TextField('Vídeo da aula', blank=True)
+    arquivo = models.FileField(
+        upload_to='aulas/materiais', blank=True, null=True)
+
+    criado_em = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado_em = models.DateTimeField('Atualizado em', auto_now_add=True)
+
+    def is_embutido(self):
+        return bool(self.embutido)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Material'
+        verbose_name_plural = 'Materiais'
 
 
 class Enrollment(models.Model):

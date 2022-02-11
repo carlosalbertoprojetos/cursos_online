@@ -5,7 +5,7 @@
 {% block breadcrumb %}
     {{ block.super }}
     <li style='margin: 5px;'>>></li>
-    <li><a>{{ curso }}</a></li>
+    <li><a href="{% url 'cursos:anuncios' curso.slug %}" >{{ curso }}</a></li>
 {% endblock %}
 
 {% block menu_options %}
@@ -13,7 +13,7 @@
     <!-- <img src="{% static 'icons/arrow-right-square-fill.svg' %}" alt=""> -->
     <strong>{{ curso }}</strong>
     <li>
-        <a href="#">
+        <a href="{% url 'cursos:aulas' curso.slug %}">
             <img src="{% static 'icons/camera-video-fill.svg' %}" alt="">
             Aulas e Materiais
         </a>
@@ -25,7 +25,7 @@
         </a>
     </li>
     <li>
-        <a href="#">
+        <a href="{% url 'cursos:anuncios' curso.slug %}">
             <img src="{% static 'icons/envelope-fill.svg' %}" alt="">
             Anúncios
         </a>

@@ -24,7 +24,7 @@
                             Bem-vindo, {{ user }}
                         </li>
                         {% block menu_options %}
-                        <li class="pure-menu card-header p-2">Cursos</li>
+                        <li class="pure-menu card-header p-2">Cursos Inscrito</li>
                         {% for enrollment in enrollments %}
                         <li class="p-2">
                             <a href = "{ url 'courses:announcements' enrollment.course.slug %}">

@@ -4,10 +4,12 @@ from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ComentariosForm, FormContatoCurso
-from .models import Anuncios, Cursos, Enrollment
+from .models import Anuncios, Cursos, Enrollment, Aulas, Materiais
+from .decorators import inscrição_required
 
 
-def lista_CursosView(request):
+
+def lista_cursos_view(request):
     lista_cursos = Cursos.objects.all()
     context = {
         'lista_cursos': lista_cursos,
@@ -26,7 +28,7 @@ def lista_CursosView(request):
 #     return render(request, template_name, context)
 
 
-def detalhes_CursoView(request, slug):
+def detalhes_curso_view(request, slug):
     curso = get_object_or_404(Cursos, slug=slug)
     context = {}
     if request.method == 'POST':
@@ -43,7 +45,7 @@ def detalhes_CursoView(request, slug):
     return render(request, template_name, context)
 
 
-def contatoCursoView(request):
+def contato_curso_view(request):
     send = False
     form = FormContatoCurso(request.POST or None)
     if form.is_valid():
@@ -109,18 +111,22 @@ def cancelar_enrollment(request, slug):
 
 
 @login_required
+@inscrição_required
 def anuncios(request, slug):
-    curso = get_object_or_404(Cursos, slug=slug)
-    if not request.user.is_staff:
-        enrollment = get_object_or_404(
-            Enrollment,
-            usuario=request.user,
-            curso=curso
-        )
-        if not enrollment.aprovado():
-            messages.error(request, 'A sua inscrição está pendente')
-            return redirect('accounts:painel')
-    template_name = 'cursos/anuncios.html'
+    curso = request.curso
+    # toda essa parte foi substituída pelo decorator @inscrição_required
+    # tudo isso abaixo foi bustituído por @inscrição_required
+    # curso = get_object_or_404(Cursos, slug=slug)
+    # if not request.user.is_staff:
+    #     enrollment = get_object_or_404(
+    #         Enrollment,
+    #         usuario=request.user,
+    #         curso=curso
+    #     )
+    #     if not enrollment.aprovado():
+    #         messages.error(request, 'A sua inscrição está pendente')
+    #         return redirect('accounts:painel')
+    template_name = 'cursos/anuncios.html' 
     context = {
         'curso': curso,
         'anuncios': curso.anuncios.all()
@@ -129,17 +135,19 @@ def anuncios(request, slug):
 
 
 @login_required
+@inscrição_required
 def painel_anuncio(request, slug, pk):
-    curso = get_object_or_404(Cursos, slug=slug)
-    if not request.user.is_staff:
-        enrollment = get_object_or_404(
-            Enrollment,
-            usuario=request.user,
-            curso=curso
-        )
-        if not enrollment.aprovado():
-            messages.error(request, 'A sua inscrição está pendente')
-            return redirect('accounts:painel')
+    curso = request.curso
+    # curso = get_object_or_404(Cursos, slug=slug)
+    # if not request.user.is_staff:
+    #     enrollment = get_object_or_404(
+    #         Enrollment,
+    #         usuario=request.user,
+    #         curso=curso
+    #     )
+    #     if not enrollment.aprovado():
+    #         messages.error(request, 'A sua inscrição está pendente')
+    #         return redirect('accounts:painel')
     anuncio = get_object_or_404(curso.anuncios.all(), pk=pk)
     form = ComentariosForm(request.POST or None)
     if form.is_valid():
@@ -155,5 +163,56 @@ def painel_anuncio(request, slug, pk):
         'curso': curso,
         'anuncio': anuncio,
         'form': form,
+    }
+    return render(request, template_name, context)
+
+
+@login_required
+@inscrição_required
+def aulas(request, slug):
+    curso = request.curso
+    aulas = curso.aulas_disponiveis()
+    if not request.user.is_staff:
+        aulas = curso.aulas.all()
+    template_name = 'cursos/aulas.html'
+    context = {
+        'curso': curso,
+        'aulas' : aulas
+    }
+    return render(request, template_name, context)
+
+
+@login_required
+@inscrição_required
+def aula(request, slug, pk):
+    curso = request.curso
+    aula = get_object_or_404(Aulas, pk=pk, curso=curso)
+    if not request.user.is_staff or not aula.is_disponivel():
+        messages.error(request, 'Esta aula não está disponível')
+        return redirect('cursos:aulas', slug=curso.slug)
+    template_name = 'cursos/aula.html'
+    context = {
+        'curso': curso,
+        'aula' : aula
+    }
+    return render(request, template_name, context)
+
+
+@login_required
+@inscrição_required
+def material(request, slug, pk):
+    curso = request.curso
+    aula = get_object_or_404(Aulas, pk=pk, curso=curso)
+    material = get_object_or_404(Materiais, pk=pk, aula__curso=curso)
+    if not request.user.is_staff or not aula.is_disponivel():
+        messages.error(request, 'Este material não está disponível para download.')
+        return redirect('cursos:aula', slug=curso.slug, pk=aula.pk)
+    if not material.is_embutido():
+        return redirect(material.file.url)
+    template_name = 'cursos/material.html'
+    context = {
+        'curso': curso,
+        'aula' : aula, 
+        'material': material
     }
     return render(request, template_name, context)
