@@ -12,8 +12,8 @@ class CursosManager(models.Manager):
 
     def search(self, query):
         return self.get_queryset().filter(
-            models.Q(name__icontains=query) |
-            models.Q(description__icontains=query)
+            models.Q(nome__icontains=query) |
+            models.Q(descricao__icontains=query)
         )
 # o models.Q() é uma espécie de filtro ( | sgnifica 'OU' e & significa 'E')
 
