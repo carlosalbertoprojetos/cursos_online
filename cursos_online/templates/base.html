@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
     
     <link rel="stylesheet" href="{% static 'css/styles1.css' %}"/>
-    <!-- <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}"/> -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}"/>
 
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
@@ -37,7 +37,7 @@
                         <a href="{% url 'cursos:lista_cursos' %}" class="nav-link lead mr-4 font-weight-bold">Cursos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link lead mr-4 font-weight-bold">Sobre</a>
+                        <a href="{% url 'forum:forum_index' %}" class="nav-link lead mr-4 font-weight-bold">Fórum</a>
                     </li>
                     {% if user.is_authenticated %}                       
                     <li class="nav-item">
