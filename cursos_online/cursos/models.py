@@ -36,7 +36,7 @@ class Cursos(models.Model):
     objects = CursosManager()
 
     def __str__(self):
-        return self.nome
+        return str(self.nome)
 
     def get_absolute_url(self):
         return reverse('cursos:detalhes_curso', args=[self.slug])
@@ -139,11 +139,11 @@ class Enrollment(models.Model):
         unique_together = (('usuario', 'curso'),)
 
     def ativo(self):
-        self.status = 1
+        self.status = '1'
         self.save()
 
     def aprovado(self):
-        return self.status == 1
+        return self.status == '1'
 
     def __str__(self):
         return self.usuario

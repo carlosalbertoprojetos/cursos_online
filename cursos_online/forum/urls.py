@@ -1,12 +1,14 @@
 from django.urls import path
 
-from .views import forum
+from .views import forum, thread, reply_correct, reply_incorrect
 
 app_name = 'forum'
 
 
 urlpatterns = [
     path('', forum, name='forum_index'),
+    path('tag/<str:tag>/', forum, name='index_tagged'),
+    path('replyc/<int:pk>/', reply_correct, name='reply_correct'),
+    path('replyi/<int:pk>/', reply_incorrect, name='reply_incorrect'),
+    path('thread/<slug:slug>/', thread, name='thread'),
 ]
-
-

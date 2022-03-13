@@ -6,13 +6,6 @@
 {% block content %}
 {% listar_meus_cursos user as enrollments %}
 <div class="card-header" style='padding: 10px;'>
-    {% if messages %}
-    <div class="breadcrumb pure-u-1">
-        {% for message in messages %}
-        <p>{{ message }}</p> 
-        {% endfor %}
-    </div>
-    {% endif %}    
     <div class="">
         <ul class="breadcrumb pure-menu-heading">
             {% block breadcrumb %}
