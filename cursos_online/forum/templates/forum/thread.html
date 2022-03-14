@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
+
 {% block content %}
+
+
 <div class="pure-g-r content-ribbon">
     <div class="pure-u-1">
         <ul class="breadcrumb">
-            <li><a href="{ url 'core:home' %}">Início</a></li>
+            <li><a href="{% url 'home' %}">Início</a></li>
             <li>/</li>
             <li><a href="{% url 'forum:forum_index' %}">Fórum de Discussões</a></li>
             <li>/</li>
@@ -69,20 +72,21 @@
                 {% for reply in object.replies.all %}
                 <hr />
                 <p>
-                <strong>{{ reply.author }}</strong> disse à {{ reply.created|timesince }} atrás:
-                <br />
-                {{ reply.reply|linebreaksbr|truncatechars:"150" }}
-                <br />
-                {% if reply.correct %}
+                    <strong>{{ reply.author }}</strong> disse à {{ reply.created|timesince }} atrás:
+                    <br />
+                    {{ reply.reply|linebreaksbr }}
+                    <br />
                     {% if reply.author == user %}
-                    <a href="{% url 'forum:reply_incorrect' reply.pk %}" title="" class="pure-button button-error reply-cancel-correct-lnk{% if not reply.correct %} hidden{% endif %}">Cancelar Resposta Correta</a>
+                        <a href="{% url 'forum:reply_incorrect' reply.pk %}" title="" class="pure-button button-error reply-cancel-correct-lnk{% if not reply.correct %} hidden{% endif %}">Cancelar Resposta</a>
+
+                        <a href="{% url 'forum:reply_correct' reply.pk %}" title="" class="pure-button button-success reply-correct-lnk{% if reply.correct %} hidden{% endif %}">Resposta Correta</a>
+
+                        <span class="fright label-success reply-correct-msg{% if not reply.correct %} hidden{% endif %}">Resposta Indicada pelo Autor</span>
+                        <br class="reply-correct-msg{% if not reply.correct %} hidden{% endif %}" />
+                    {% elif reply.correct %}
+                        <span class="fright label-success">Resposta Indicada pelo Autor</span>
+                        <br />
                     {% endif %}
-                    <span class="fright label-success reply-correct-msg{% if not reply.correct %} hidden{% endif %}">Resposta Indicada pelo Autor</span>
-                    <br/>
-                {% elif reply.author == user %}
-                    <a href="{% url 'forum:reply_correct' reply.pk %}" title="" class="pure-button button-success reply-correct-lnk{% if reply.correct %} hidden{% endif %}">Resposta Correta</a>
-                    <br class="reply-correct-msg{% if not reply.correct %} hidden{% endif %}" />
-                {% endif %}
                 </p>
                 {% endfor %}
                 <hr />
@@ -105,9 +109,11 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}
+
 <script type="text/javascript">
     $(".reply-cancel-correct-lnk").on("click", function(e){
         e.preventDefault();
@@ -144,4 +150,5 @@
         return false;
     })
 </script>
+
 {% endblock %}

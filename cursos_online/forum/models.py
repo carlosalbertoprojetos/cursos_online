@@ -60,7 +60,7 @@ class Reply(models.Model):
 def post_save_reply(instance, **kwargs):
     instance.thread.answers = instance.thread.replies.count()
     instance.thread.save()
-    # apenas uma resposta estará correta
+    # apenas uma resposta correta
     if instance.correct:
         instance.thread.replies.exclude(pk=instance.pk).update(
             correct=False

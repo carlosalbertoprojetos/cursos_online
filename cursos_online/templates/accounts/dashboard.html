@@ -4,6 +4,8 @@
 {% load cursos_tags %}
 
 {% block content %}
+
+
 {% listar_meus_cursos user as enrollments %}
 <div class="card-header" style='padding: 10px;'>
     <div class="">
@@ -27,8 +29,7 @@
                         {% for enrollment in enrollments %}
                         <li>
                             <a href="{% url 'cursos:anuncios' enrollment.curso.slug %}">
-                                <img src="{% static 'icons/journal-bookmark-fill.svg' %}" alt="">
-                                <strong style="font-size: 14px">{{ enrollment.curso }}</strong>
+                                <i class="fa fa-book pr-1"></i>{{ enrollment.curso }}
                             </a>
                         </li> 
                         {% empty %}
@@ -37,13 +38,13 @@
                         <li class="card card-header p-2"><strong>Configurações de Conta</strong></li>
                         <li>
                             <a href="{% url 'accounts:editar_usuario' %}">
-                                <img src="{% static 'icons/gear-fill.svg' %}" alt="">
+                                <i class="fa fa-cog"></i>
                                 Editar Conta
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'accounts:editar_senha' %}">
-                            <img src="{% static 'icons/shield-lock-fill.svg' %}" alt="">
+                            <i class="fa fa-lock"></i>
                             Editar Senha</a>
                         </li>
                         {% endblock menu_options %}
@@ -81,6 +82,4 @@
     </div>
 </div>
 
-
 {% endblock content %}
-

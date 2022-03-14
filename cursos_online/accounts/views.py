@@ -2,25 +2,22 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm, UserCreationForm
-from django.shortcuts import redirect, render, get_object_or_404
-
+from django.contrib.auth.forms import (
+    PasswordChangeForm, SetPasswordForm
+    )
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .models import ResetarSenha
-from cursos.models import Enrollment
 from .forms import CadastrarUsuarioForm, EditarUsuarioForm, ResetarSenhaForm
-from .utils import generate_hash_key
-
-
+from .models import ResetarSenha
 User = get_user_model()
 
 
 class CadastrarUsuarioView(generic.CreateView):
     form_class = CadastrarUsuarioForm
     template_name = 'accounts/cadastrar_usuario.html'
-    success_url = reverse_lazy('accounts:login') 
+    success_url = reverse_lazy('accounts:login')
 
 
 def resetar_senha(request):
@@ -28,9 +25,9 @@ def resetar_senha(request):
     context = {}
     form = ResetarSenhaForm(request.POST or None)
     if form.is_valid():
-       form.save()
-       context['success'] = True
-    context ['form'] =  form
+        form.save()
+        context['success'] = True
+    context['form'] = form
     return render(request, template_name, context)
 
 
@@ -79,9 +76,9 @@ def editar_usuario(request):
         form = EditarUsuarioForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, 
-                'Dados alterados com sucesso!!!'
-                )
+            messages.success(request,
+                             'Dados alterados com sucesso!!!'
+                             )
             return redirect('accounts:painel')
     else:
         form = EditarUsuarioForm(instance=request.user)
@@ -97,13 +94,11 @@ def editar_senha(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, 
-                'Senha alterada com sucesso!!!'
-                )
+            messages.success(request,
+                             'Senha alterada com sucesso!!!'
+                             )
             return redirect('accounts:painel')
     else:
         form = PasswordChangeForm(user=request.user)
     context['form'] = form
     return render(request, template_name, context)
-
-
