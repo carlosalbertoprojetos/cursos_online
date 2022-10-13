@@ -42,20 +42,24 @@ from django.test import TestCase
 
 from ..models import User
 
+class CreateNewUser(TestCase):
+    # executa sempre antes de iniciar o teste
+    def setUp(self):
+        User.objects.create(
+            username='Username',
+            email = 'usuario@us.com',
+            name = 'Name',
+        )
 
-
-def test():    
-    User.objects.create(
-        username='Username',
-        email = 'usuario@us.com',
-        name = 'Name',
-    )
+    def test():
+        User.objects.create(
+            username='Username',
+            email = 'usuario@us.com',
+            name = 'Name',
+        )
     teste_cadastro = User.objects.get(username='Username')
-    # teste_cadastro = {'username': 'UsernameTeste', 'email': 'usuarioteste@us.com', 'name': 'NameTeste'}
     print('Teste que altera dados do novo usuário:\n'
         'Name:', teste_cadastro.name,'\n'
         'Username:', teste_cadastro.username,'\n'
         'Email:', teste_cadastro.email,
         )
-
-test()
