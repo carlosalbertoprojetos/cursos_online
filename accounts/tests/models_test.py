@@ -51,12 +51,6 @@ class CreateNewUser(TestCase):
             name = 'Name',
         )
 
-    def test():
-        User.objects.create(
-            username='Username',
-            email = 'usuario@us.com',
-            name = 'Name',
-        )
     teste_cadastro = User.objects.get(username='Username')
     print('Teste que altera dados do novo usuário:\n'
         'Name:', teste_cadastro.name,'\n'
