@@ -1,5 +1,5 @@
 from django.test import TestCase
-# from ..models import User
+from ..models import User
 
 
 # class CreateNewUser(TestCase):
@@ -40,7 +40,6 @@ from django.test import TestCase
 #             'Email:', teste_cadastro2.email,
 #         )
 
-from ..models import User
 
 class CreateNewUser(TestCase):
     # executa sempre antes de iniciar o teste
@@ -50,10 +49,12 @@ class CreateNewUser(TestCase):
             email = 'usuario@us.com',
             name = 'Name',
         )
-
-    teste_cadastro = User.objects.get(username='Username')
-    print('Teste que altera dados do novo usuário:\n'
-        'Name:', teste_cadastro.name,'\n'
-        'Username:', teste_cadastro.username,'\n'
-        'Email:', teste_cadastro.email,
-        )
+    
+    def test_filtra_username_altera_dados_e_printa_o_que_foi_alterado(self):
+        teste_cadastro = User.objects.get(username='Username')
+        self.assertEquals(teste_cadastro.__str__(), 'Name')
+        print('Teste que altera dados do novo usuário:\n'
+            'Name:', teste_cadastro.name,'\n'
+            'Username:', teste_cadastro.username,'\n'
+            'Email:', teste_cadastro.email,
+            )
