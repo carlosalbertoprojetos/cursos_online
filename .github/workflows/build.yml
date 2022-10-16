@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
       - sonar_manual
   pull_request:
     types: [opened, synchronize, reopened]
