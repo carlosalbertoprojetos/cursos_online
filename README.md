@@ -1,11 +1,3 @@
-Cursos_online
-
-Este projeto visa desenvolver uma plataforma de cursos online cujo aluno terá acesso para inscrição aos cursos disponíveis, bem como um dashboard contendo seus dados pessoais, curso inscritos e concluídos. Estará disponibilizado campos para comentários sobre os cursos, os quais poderão disponibilizar materiais como arquivos e vídeos para os alunos inscritos.
-
-Aqui está um exemplo de README para o seu projeto baseado no curso "Full-Stack Web Development with Flask":
-
----
-
 # Projeto Full-Stack Web Development with Flask
 
 Bem-vindo ao repositório do projeto desenvolvido durante o curso **Full-Stack Web Development with Flask**. Este projeto abrange várias funcionalidades de uma aplicação web completa, utilizando o framework Flask para o desenvolvimento back-end e tecnologias modernas para o front-end.
