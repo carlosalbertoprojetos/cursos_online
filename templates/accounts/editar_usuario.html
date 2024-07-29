@@ -1,9 +1,9 @@
 {% extends "accounts/dashboard.html" %}
 
 {% block breadcrumb %}
-    {{ block.super }}
-    <li style='margin: 5px;'>>></li>
-    <li><a>Editar Conta</a></li>
+{{ block.super }}
+<li class="px-2"> / </li>
+<li><a>Editar</a></li>
 {% endblock %}
 
 {% block dashboard_content %}
@@ -22,9 +22,8 @@
         </div>
         {% endfor %}
         <div class="pure-controls">
-            <button type="submit" 
-            class="pure-button pure-button-primary">
-            Salvar</button>
+            <button type="submit" class="pure-button pure-button-primary">
+                Salvar</button>
         </div>
     </fieldset>
 </form>

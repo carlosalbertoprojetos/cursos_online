@@ -1,102 +1,285 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="description">
+        <meta content="" name="keywords">
 
-<head>    
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
-    
-    <link rel="stylesheet" href="{% static 'css/styles1.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}"/>
+        <!-- Favicons -->
+        <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+        <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+        <link rel="icon" href="{% static 'assets/imt/favicon.png' %}">
+        <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
 
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
 
-    <title>{% block title %}Cursos Online{% endblock title %}</title>
-</head>
+        <!-- Vendor CSS Files -->
+        <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
-<div class="container-flex">
-    <nav class="navbar navbar-expand-sm py-3 border-bottom navbar-light" style='margin-bottom: 0'>
-        <div class="container">
-            <a href="{% url 'home' %}" class="navbar-brand">
-                <span class="font-weight-bold h3">Home</span>
-            </a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"> </span>
-            </button>
-            Usuário logado: {{ user }}
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="{% url 'contato' %}" class="nav-link lead mr-4 font-weight-bold">Contato</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'cursos:lista_cursos' %}" class="nav-link lead mr-4 font-weight-bold">Cursos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'forum:forum_index' %}" class="nav-link lead mr-4 font-weight-bold">Fórum</a>
-                    </li>
-                    {% if user.is_authenticated %}                       
-                    <li class="nav-item">
-                        <a href="{% url 'accounts:painel' %}" class="nav-link lead mr-4 font-weight-bold">Painel</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'accounts:logout' %}" class="nav-link lead mr-4 font-weight-bold">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a href="{% url 'accounts:cadastrar_usuario' %}" class="nav-link lead mr-4 font-weight-bold">Cadastrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'accounts:login' %}" class="nav-link lead mr-4 font-weight-bold">Login</a>
-                    </li>
-                    {% endif %}
-                    {% if user.is_superuser %}
-                    <li class="nav-item">
-                        <a href="/admin/" class="nav-link lead mr-4 font-weight-bold">Admin</a>
-                    </li>
-                    {% endif %}
-                </ul>
+        <!-- Main CSS File -->
+        <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+        <title>{% block title %}Cursos Online{% endblock title %}</title>
+    </head>
+
+    <body class="index-page">
+
+        <header id="header" class="header d-flex align-items-center sticky-top">
+            <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+                <a href="/" class="logo d-flex align-items-center me-auto">
+                    <!-- Uncomment the line below if you also wish to use an image logo -->
+                    <!-- <img src="{% static 'assets/img/logo.png" alt=""> -->
+                    <h1 class="sitename">Cursos Online</h1>
+                </a>
+
+                <nav id="navmenu" class="navmenu">
+                    <!-- <ul>
+                        <li><a href="/" class="active">Home<br></a></li>
+                        <li><a href="courses.html">Cursos</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="trainers.html">Trainers</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li class="dropdown"><a href="#"><span>Dropdown</span> <i
+                                    class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Dropdown 1</a></li>
+                                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
+                                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                    <ul>
+                                        <li><a href="#">Deep Dropdown 1</a></li>
+                                        <li><a href="#">Deep Dropdown 2</a></li>
+                                        <li><a href="#">Deep Dropdown 3</a></li>
+                                        <li><a href="#">Deep Dropdown 4</a></li>
+                                        <li><a href="#">Deep Dropdown 5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Dropdown 2</a></li>
+                                <li><a href="#">Dropdown 3</a></li>
+                                <li><a href="#">Dropdown 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul> -->
+                    <ul>
+                        <li>
+                            <a href="{% url 'cursos:lista_cursos' %}"
+                                class="nav-link lead mr-4 font-weight-bold">Cursos</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'accounts:painel' %}" class="nav-link lead mr-4 font-weight-bold">Painel</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'accounts:logout' %}" class="nav-link lead mr-4 font-weight-bold">Logout</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'accounts:cadastrar_usuario' %}"
+                                class="nav-link lead mr-4 font-weight-bold">Cadastrar</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'accounts:login' %}" class="nav-link lead mr-4 font-weight-bold">Login</a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="{% url 'forum:forum_index' %}"
+                                class="nav-link lead mr-4 font-weight-bold">Fórum</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'contato' %}" class="nav-link lead mr-4 font-weight-bold">Contato</a>
+                        </li>
+                        {% if user.is_superuser %}
+                        <li>
+                            <a href="/admin/" class="nav-link lead mr-4 font-weight-bold">Admin</a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                </nav>
+
+                <a class="btn-getstarted" href="{% url 'cursos:lista_cursos' %}">Cursos</a>
+
             </div>
+        </header>
+
+        <main class="main">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer id="footer" class="footer position-relative light-background">
+
+            <div class="container footer-top">
+                <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6 footer-about">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <span class="sitename">Mentor</span>
+                        </a>
+                        <div class="footer-contact pt-3">
+                            <p>A108 Adam Street</p>
+                            <p>New York, NY 535022</p>
+                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        </div>
+                        <div class="social-links d-flex mt-4">
+                            <a href=""><i class="bi bi-twitter-x"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><a href="#">Web Design</a></li>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Product Management</a></li>
+                            <li><a href="#">Marketing</a></li>
+                            <li><a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+                        <form action="forms/newsletter.php" method="post" class="php-email-form">
+                            <div class="newsletter-form"><input type="email" name="email"><input type="submit"
+                                    value="Subscribe"></div>
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container copyright text-center mt-4">
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">Mentor</strong> <span>All Rights
+                        Reserved</span></p>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you've purchased the pro version. -->
+                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+            </div>
+
+        </footer>
+
+        <!-- Scroll Top -->
+        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
+
+        <!-- Preloader -->
+        <div id="preloader"></div>
+
+        <!-- Vendor JS Files -->
+        <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+        <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+        <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+        <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+        <!-- Main JS File -->
+        <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+        {% block scripts %}
+        {% endblock %}
+    </body>
+    <!-- 
+    <div class="container-flex">
+        <nav class="navbar navbar-expand-sm py-3 border-bottom navbar-light" style='margin-bottom: 0'>
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                    <span class="font-weight-bold h3">Home</span>
+                </a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"> </span>
+                </button>
+                Usuário logado: {{ user }}
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li>
+                            <a href="{% url 'contato' %}" class="nav-link lead mr-4 font-weight-bold">Contato</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'cursos:lista_cursos' %}"
+                                class="nav-link lead mr-4 font-weight-bold">Cursos</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'forum:forum_index' %}"
+                                class="nav-link lead mr-4 font-weight-bold">Fórum</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'accounts:painel' %}" class="nav-link lead mr-4 font-weight-bold">Painel</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'accounts:logout' %}" class="nav-link lead mr-4 font-weight-bold">Logout</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'accounts:cadastrar_usuario' %}"
+                                class="nav-link lead mr-4 font-weight-bold">Cadastrar</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'accounts:login' %}" class="nav-link lead mr-4 font-weight-bold">Login</a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_superuser %}
+                        <li>
+                            <a href="/admin/" class="nav-link lead mr-4 font-weight-bold">Admin</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% if messages %}
+        <div class="breadcrumb pure-u-1">
+            {% for message in messages %}
+
+            <h3><i>{{ message }}</i></h3>
+
+            {% endfor %}
         </div>
-    </nav>
+        {% endif %}
 
-    {% if messages %}
-    <div class="breadcrumb pure-u-1">
-        {% for message in messages %}
-
-        <h3><i>{{ message }}</i></h3>
-
-        {% endfor %}
-    </div>
-    {% endif %}    
-
-    {% block content %}
-    {% endblock %}
-
-    <div class="footer">
-        <i><b>Sistema auxiliar de gestão para cursos à distância</b></i>
-    </div>
-</div>
-
-    <scripts src="{% static 'js/scripts.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
-    crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-    crossorigin="anonymous"></script>
-
-    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
-    <!-- ajax -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    {% block scripts %}
-    {% endblock %}
+        <div class="footer">
+            <i><b>Sistema auxiliar de gestão para cursos à distância</b></i>
+        </div>
+    </div> -->
 
 </html>
-

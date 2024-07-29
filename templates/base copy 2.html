@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+
+        <!-- Favicons -->
+        <link rel="icon" href="{% static 'assets/imt/favicon.png' %}">
+        <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
+
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+        <!-- Main CSS File -->
+        <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+        <title>{% block title %}Cursos Online{% endblock title %}</title>
+    </head>
+
+    <body class="index-page">
+        <header id="header" class="header d-flex align-items-center sticky-top">
+            <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+                <a href="/" class="logo d-flex align-items-center me-auto">
+                    <!-- Uncomment the line below if you also wish to use an image logo -->
+                    <!-- <img src="assets/img/logo.png" alt=""> -->
+                    <h1 class="sitename">Cursos Online</h1>
+                </a>
+
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        <li><a href="index.html" class="active">Home<br></a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="trainers.html">Trainers</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li class="dropdown"><a href="#"><span>Dropdown</span> <i
+                                    class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Dropdown 1</a></li>
+                                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
+                                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                    <ul>
+                                        <li><a href="#">Deep Dropdown 1</a></li>
+                                        <li><a href="#">Deep Dropdown 2</a></li>
+                                        <li><a href="#">Deep Dropdown 3</a></li>
+                                        <li><a href="#">Deep Dropdown 4</a></li>
+                                        <li><a href="#">Deep Dropdown 5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Dropdown 2</a></li>
+                                <li><a href="#">Dropdown 3</a></li>
+                                <li><a href="#">Dropdown 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                </nav>
+
+                <!-- <a class="btn-getstarted" href="courses.html">Get Started</a> -->
+
+            </div>
+        </header>
+
+        <div class="container-flex">
+            <nav class="navbar navbar-expand-sm py-3 border-bottom navbar-light" style='margin-bottom: 0'>
+                <div class="container">
+                    <a href="/" class="navbar-brand">
+                        <span class="font-weight-bold h3">Home</span>
+                    </a>
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"> </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a href="{% url 'contato' %}" class="nav-link lead mr-4 font-weight-bold">Contato</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'cursos:lista_cursos' %}"
+                                    class="nav-link lead mr-4 font-weight-bold">Cursos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'forum:forum_index' %}"
+                                    class="nav-link lead mr-4 font-weight-bold">Fórum</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="{% url 'accounts:painel' %}"
+                                    class="nav-link lead mr-4 font-weight-bold">Painel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'accounts:logout' %}"
+                                    class="nav-link lead mr-4 font-weight-bold">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'accounts:cadastrar_usuario' %}"
+                                    class="nav-link lead mr-4 font-weight-bold">Cadastrar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'accounts:login' %}"
+                                    class="nav-link lead mr-4 font-weight-bold">Login</a>
+                            </li>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                            <li class="nav-item">
+                                <a href="/admin/" class="nav-link lead mr-4 font-weight-bold">Admin</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            {% if messages %}
+            <div class="breadcrumb pure-u-1">
+                {% for message in messages %}
+
+                <h3><i>{{ message }}</i></h3>
+
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+
+
+            <div class="footer fixed-bottom text-center p-3">
+                <i><b>Sistema auxiliar de gestão para cursos à distância</b></i>
+            </div>
+
+        </div>
+
+        <!-- Scroll Top -->
+        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
+
+        <!-- Preloader -->
+        <div id="preloader"></div>
+
+        {% block scripts %}
+        {% endblock %}
+    </body>
+
+</html>
