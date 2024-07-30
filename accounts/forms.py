@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+
 # from django.contrib.auth.forms import UserCreationForm
 
 from .models import ResetarSenha
@@ -9,58 +10,81 @@ from .mail import send_email_template
 
 User = get_user_model()
 
+
 class CadastrarUsuarioForm(forms.ModelForm):
-    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label='Confirmação de Senha', widget=forms.PasswordInput
+    password1 = forms.CharField(
+        label="Senha",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-control-sm",
+            }
+        ),
     )
-    
+    password2 = forms.CharField(
+        label="Confirmação de Senha",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-control-sm",
+            },
+        ),
+    )
+
     class Meta:
         model = User
-        fields = ['email', 'username']
-    
+        fields = ["email", "username"]
+        widgets = {
+            "email": forms.EmailInput(
+                attrs={
+                    "class": "form-control form-control-sm",
+                },
+            ),
+            "username": forms.TextInput(
+                attrs={
+                    "class": "form-control form-control-sm",
+                }
+            ),
+        }
+
     def clean_password2(self):
-        password1 = self.cleaned_data['password1']
-        password2 = self.cleaned_data['password2']
+        password1 = self.cleaned_data["password1"]
+        password2 = self.cleaned_data["password2"]
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError(
-                'As senhas não são iguais',
+                "As senhas não são iguais",
             )
         return password2
-    
+
     def save(self, commit=True):
         user = super(CadastrarUsuarioForm, self).save(commit=False)
-        user.set_password(self.cleaned_data['password1'])
+        user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
         return user
-    
+
 
 class ResetarSenhaForm(forms.Form):
-    email = forms.EmailField(label='email')    
+    email = forms.EmailField(label="email")
 
     def clean_email(self):
-        """ 
+        """
         validação - verificar se o email informado para cadastrado já existe
         """
-        email = self.cleaned_data['email']
+        email = self.cleaned_data["email"]
         if User.objects.filter(email=email).exists():
             return email
-        raise forms.ValidationError(
-            'Nenhum usuário encontrado com este email.'
-        )
-        
+        raise forms.ValidationError("Nenhum usuário encontrado com este email.")
+
     def save(self, commit=True):
-        user = User.objects.get(email=self.cleaned_data['email'])
+        user = User.objects.get(email=self.cleaned_data["email"])
         key = generate_hash_key(user.username)
         reset = ResetarSenha(key=key, user=user)
         reset.save()
-        template_name = 'accounts/resetar_senha_email.html'
-        subject = 'Criar nova senha.'
+        template_name = "accounts/resetar_senha_email.html"
+        subject = "Criar nova senha."
         context = {
-            'reset': reset,
+            "reset": reset,
         }
-        send_email_template(subject, template_name, context, ['user.email'])
+        send_email_template(subject, template_name, context, ["user.email"])
 
 
 # class CriarUsuariocomEmailForm(UserCreationForm):
@@ -71,7 +95,7 @@ class ResetarSenhaForm(forms.Form):
 #         fields = ['email', 'username']
 
 #     def clean_email(self):
-#         """ 
+#         """
 #         validação - verificar se o email informado para cadastrado já existe
 #         """
 #         email = self.cleaned_data.get('email')
@@ -79,16 +103,16 @@ class ResetarSenhaForm(forms.Form):
 #             raise forms.ValidationError('Este email já está cadastrado, por favor insira outro.')
 #         return email
 
-  
-class EditarUsuarioForm(forms.ModelForm):        
- 
+
+class EditarUsuarioForm(forms.ModelForm):
+
     class Meta:
         model = User
-        fields = ['username', 'email', 'name'] 
+        fields = ["username", "email", "name"]
 
 
 # class EditarUsuarioForm(forms.ModelForm):
-    
+
 #     def clean_email(self):
 #         email = self.cleaned_data['email']
 #         queryset = User.objects.filter(
@@ -96,10 +120,7 @@ class EditarUsuarioForm(forms.ModelForm):
 #         if queryset.exists():
 #             raise forms.ValidationError('Este email já está cadastrado, por favor insira outro.')
 #         return email
-    
+
 #     class Meta:
 #         model = User
 #         fields = ['username', 'email', 'first_name', 'last_name']
-        
-        
-        

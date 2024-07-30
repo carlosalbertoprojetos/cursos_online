@@ -7,14 +7,15 @@
 <!-- Hero Section -->
 <section id="hero" class="hero section dark-background">
 
-    <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+    <!-- <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in"> -->
+    <!-- <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in"> -->
 
     <div class="container">
-        <h2 data-aos="fade-up" data-aos-delay="100">Learning Today,<br>Leading Tomorrow</h2>
-        <p data-aos="fade-up" data-aos-delay="200">We are team of talented designers making websites with
-            Bootstrap</p>
+        <h2 data-aos="fade-up" data-aos-delay="100">Aprender hoje,<br>Liderar amanhã</h2>
+        <p data-aos="fade-up" data-aos-delay="200">Estudar é a chave para abrir portas de oportunidades, expandir
+            horizontes e transformar sonhos em realidade.</p>
         <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-            <a href="courses.html" class="btn-get-started">Get Started</a>
+            <a href="{% url 'cursos:lista_cursos' %}" class="btn-get-started">Comece já</a>
         </div>
     </div>
 

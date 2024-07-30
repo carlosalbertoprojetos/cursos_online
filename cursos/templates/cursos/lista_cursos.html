@@ -37,11 +37,10 @@
                 <div class="course-item">
                     <a href="{{ curso.get_absolute_url }}">
                         {% if curso.imagem %}
-                        <img src="{{ curso.imagem.url }}" class="img-fluid" alt="{{ curso.nome }}" width="354"
-                            height="235.84" />
+                        <img src="{{ curso.imagem.url }}" class="img-fluid course-img" alt="{{ curso.nome }}" />
                         {% else %}
-                        <img src="{% static 'img/course-image.png' %}" class="img-fluid" alt="{{ curso.nome }}"
-                            width="354" height="235.84" />
+                        <img src="{% static 'assets/img/course-image.png' %}" class="img-fluid"
+                            alt="{{ curso.nome }}" />
                         {% endif %}
                     </a>
                     <div class="course-content">
@@ -49,12 +48,11 @@
                             <p class="category">Web Development</p>
                             <p class="price">$169</p>
                         </div>
-
                         <h3><a href="course-details.html">{{ curso.nome }}</a></h3>
-                        <p class="description mb-3">{{ curso.descricao | truncatechars:"200" }}</p>
-                        <div class="trainer d-flex justify-content-between align-items-center fixed-bottom mx-3 p-3">
+                        <p class="description mb-3 pb-5">{{ curso.descricao | truncatechars:"120" }}</p>
+                        <div class="trainer d-flex justify-content-between align-items-center fixed-bottom mx-3 p-2">
                             <div class="trainer-profile d-flex align-items-center">
-                                <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
+                                <img src="{% static 'assets/img/trainers/trainer-1-2.jpg' %}" class="img-fluid" alt="">
                                 <a href="" class="trainer-link">Antonio</a>
                             </div>
                             <div class="trainer-rank d-flex align-items-center">

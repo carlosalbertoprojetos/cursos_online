@@ -9,10 +9,9 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-        <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-        <link rel="icon" href="{% static 'assets/imt/favicon.png' %}">
-        <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
+        <!-- <link rel="icon" href="{% static 'assets/img/favicon.png' %}"> -->
+        <!-- <link rel="icon" href="static/assets/img/favicon.png">
+        <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> -->
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -29,6 +28,7 @@
         <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
         <!-- Main CSS File -->
+        <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
         <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
 
         <title>{% block title %}Cursos Online{% endblock title %}</title>
@@ -40,9 +40,8 @@
             <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
                 <a href="/" class="logo d-flex align-items-center me-auto">
-                    <!-- Uncomment the line below if you also wish to use an image logo -->
-                    <!-- <img src="{% static 'assets/img/logo.png" alt=""> -->
-                    <h1 class="sitename">Cursos Online</h1>
+                    <img src="{% static 'assets/img/logo.png' %}" alt="">
+                    <span class="fw-bold fs-3 pt-1">Cursos Online</span>
                 </a>
 
                 <nav id="navmenu" class="navmenu">
@@ -79,22 +78,6 @@
                             <a href="{% url 'cursos:lista_cursos' %}"
                                 class="nav-link lead mr-4 font-weight-bold">Cursos</a>
                         </li>
-                        {% if user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'accounts:painel' %}" class="nav-link lead mr-4 font-weight-bold">Painel</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'accounts:logout' %}" class="nav-link lead mr-4 font-weight-bold">Logout</a>
-                        </li>
-                        {% else %}
-                        <li>
-                            <a href="{% url 'accounts:cadastrar_usuario' %}"
-                                class="nav-link lead mr-4 font-weight-bold">Cadastrar</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'accounts:login' %}" class="nav-link lead mr-4 font-weight-bold">Login</a>
-                        </li>
-                        {% endif %}
                         <li>
                             <a href="{% url 'forum:forum_index' %}"
                                 class="nav-link lead mr-4 font-weight-bold">Fórum</a>
@@ -102,9 +85,20 @@
                         <li>
                             <a href="{% url 'contato' %}" class="nav-link lead mr-4 font-weight-bold">Contato</a>
                         </li>
-                        {% if user.is_superuser %}
+                        {% if not user.is_authenticated %}
                         <li>
-                            <a href="/admin/" class="nav-link lead mr-4 font-weight-bold">Admin</a>
+                            <a href="{% url 'accounts:cadastrar_usuario' %}"
+                                class="nav-link lead mr-4 font-weight-bold">Cadastrar</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'accounts:login' %}" class="nav-link lead mr-4 font-weight-bold">Entrar</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'accounts:painel' %}" class="nav-link lead mr-4 font-weight-bold">Painel</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'accounts:logout' %}" class="nav-link lead mr-4 font-weight-bold">Sair</a>
                         </li>
                         {% endif %}
 
@@ -112,7 +106,7 @@
                     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
 
-                <a class="btn-getstarted" href="{% url 'cursos:lista_cursos' %}">Cursos</a>
+                <a class="btn-getstarted d-md-none" href="{% url 'cursos:lista_cursos' %}">Cursos</a>
 
             </div>
         </header>
@@ -122,19 +116,18 @@
             {% endblock %}
         </main>
 
-        <footer id="footer" class="footer position-relative light-background">
-
+        <!-- <footer id="footer" class="footer position-relative light-background">
             <div class="container footer-top">
                 <div class="row gy-4">
                     <div class="col-lg-4 col-md-6 footer-about">
-                        <a href="index.html" class="logo d-flex align-items-center">
-                            <span class="sitename">Mentor</span>
+                        <a href="/" class="logo d-flex align-items-center">
+                            <span class="sitename">Cursos Online</span>
                         </a>
                         <div class="footer-contact pt-3">
-                            <p>A108 Adam Street</p>
-                            <p>New York, NY 535022</p>
-                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                            <p>Av. Imaginária, 100</p>
+                            <p>Cidade / Estado</p>
+                            <p class="mt-3"><strong>Telefone:</strong> <span>+55 31 99999-8787</span></p>
+                            <p><strong>Email:</strong> <span>cursosonline@co.com</span></p>
                         </div>
                         <div class="social-links d-flex mt-4">
                             <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -148,10 +141,10 @@
                         <h4>Useful Links</h4>
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Terms of service</a></li>
-                            <li><a href="#">Privacy policy</a></li>
+                            <li><a href="#">Cursos</a></li>
+                            <li><a href="#">Painel</a></li>
+                            <li><a href="#">Fórum</a></li>
+                            <li><a href="#">Contato</a></li>
                         </ul>
                     </div>
 
@@ -180,23 +173,21 @@
 
                 </div>
             </div>
+        </footer> -->
 
-            <div class="container copyright text-center mt-4">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">Mentor</strong> <span>All Rights
-                        Reserved</span></p>
-                <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you've purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
+        <!-- ======= Footer ======= -->
+        <footer id="footer" class="footer fixed-bottom">
+            <div class="copyright p-0">
+                <b>Sistema auxiliar de gestão para cursos à distância</b>
             </div>
-
-        </footer>
+            <div class="credits mb-0">
+                Designed by BootstrapMade
+            </div>
+        </footer><!-- End Footer -->
 
         <!-- Scroll Top -->
-        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+        <a href="#" id="scroll-top"
+            class="scroll-top d-flex align-items-center justify-content-center border border-white active"><i
                 class="bi bi-arrow-up-short"></i></a>
 
         <!-- Preloader -->

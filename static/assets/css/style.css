@@ -14,7 +14,7 @@
   /* Default color used for the majority of the text content across the entire website */
   --heading-color: #37423b;
   /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #5fcf80;
+  --accent-color: #ffca58;
   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff;
   /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
@@ -25,7 +25,7 @@
 :root {
   --nav-color: #272828;
   /* The default color of the main navmenu links */
-  --nav-hover-color: #5fcf80;
+  --nav-hover-color: #ffca58;
   /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff;
   /* Used as the background color for mobile navigation menu */
@@ -33,7 +33,7 @@
   /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #272828;
   /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #5fcf80;
+  --nav-dropdown-hover-color: #ffca58;
   /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
@@ -89,7 +89,7 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 60px;
+  margin-top: 80px;
   padding: 20px 30px;
   transition: all 0.3s;
 }
@@ -124,7 +124,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: #5fcf80;
+  background: #ffca58;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -288,7 +288,7 @@ h6 {
 }
 
 .card-title span {
-  color: #5fcf80;
+  color: #ffca58;
   font-size: 14px;
   font-weight: 400;
 }
@@ -341,7 +341,7 @@ h6 {
 
 .accordion-flush .accordion-button:not(.collapsed) {
   box-shadow: none;
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .accordion-flush .accordion-body {
@@ -354,25 +354,25 @@ h6 {
 .breadcrumb {
   font-size: 14px;
   font-family: "Nunito", sans-serif;
-  color: #5fcf80;
+  color: #ffca58;
   font-weight: 600;
 }
 
 .breadcrumb a {
-  color: #5fcf80;
+  color: #ffca58;
   transition: 0.3s;
 }
 
 .breadcrumb a:hover {
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .breadcrumb .breadcrumb-item::before {
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .breadcrumb .active {
-  color: #5fcf80;
+  color: #ffca58;
   font-weight: 600;
 }
 
@@ -389,13 +389,13 @@ h6 {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #5fcf80;
-  border-bottom: 2px solid #5fcf80;
+  color: #ffca58;
+  border-bottom: 2px solid #ffca58;
 }
 
 /*--------------------------------------------------------------
@@ -411,32 +411,28 @@ h6 {
   }
 }
 
-.logo img {
-  max-height: 55px;
-
-}
 
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #5fcf80;
+  color: #ffca58;
   font-family: "Nunito", sans-serif;
 }
 
 .header {
   transition: all 0.5s;
   z-index: 997;
-  height: 60px;
+  height: 80px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   background-color: #fff;
-  padding-left: 20px;
+  padding-left: 14px;
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
 
 .header .toggle-sidebar-btn {
   font-size: 24px;
-  padding-left: 25px;
+  padding-left: 10px;
   cursor: pointer;
   color: #595858;
 }
@@ -721,7 +717,7 @@ h6 {
 .sidebar-nav .nav-heading {
   font-size: 11px;
   text-transform: uppercase;
-  color: #5fcf80;
+  color: #ffca58;
   font-weight: 600;
   margin: 10px 0 5px 15px;
 }
@@ -731,7 +727,7 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #5fcf80;
+  color: #ffca58;
   transition: 0.3;
   background: #f6f9ff;
   padding: 10px 15px;
@@ -741,7 +737,7 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .sidebar-nav .nav-link.collapsed {
@@ -754,12 +750,12 @@ h6 {
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #5fcf80;
+  color: #ffca58;
   background: #f6f9ff;
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -797,11 +793,11 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: #5fcf80;
+  background-color: #ffca58;
 }
 
 /*--------------------------------------------------------------
@@ -824,7 +820,7 @@ h6 {
 
 .dashboard .filter .icon:hover,
 .dashboard .filter .icon:focus {
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .dashboard .filter .dropdown-header {
@@ -868,7 +864,7 @@ h6 {
 }
 
 .dashboard .sales-card .card-icon {
-  color: #5fcf80;
+  color: #ffca58;
   background: #f6f6fe;
 }
 
@@ -878,7 +874,7 @@ h6 {
 }
 
 .dashboard .customers-card .card-icon {
-  color: #5fcf80;
+  color: #ffca58;
   background: #ffecdf;
 }
 
@@ -953,7 +949,7 @@ h6 {
 }
 
 .dashboard .news h4 a:hover {
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .dashboard .news p {
@@ -1101,7 +1097,7 @@ h6 {
 .faq .basic h6 {
   font-size: 18px;
   font-weight: 600;
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .faq .basic p {
@@ -1118,7 +1114,7 @@ h6 {
 .contact .info-box i {
   font-size: 38px;
   line-height: 0;
-  color: #5fcf80;
+  color: #ffca58;
 }
 
 .contact .info-box h3 {
@@ -1185,7 +1181,7 @@ h6 {
 
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
-  border-color: #5fcf80;
+  border-color: #ffca58;
 }
 
 .contact .php-email-form input {
@@ -1197,7 +1193,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #5fcf80;
+  background: #ffca58;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -1229,7 +1225,7 @@ h6 {
 .error-404 h1 {
   font-size: 180px;
   font-weight: 700;
-  color: #5fcf80;
+  color: #ffca58;
   margin-bottom: 0;
   line-height: 150px;
 }
@@ -1242,7 +1238,7 @@ h6 {
 }
 
 .error-404 .btn {
-  background: #5fcf80;
+  background: #ffca58;
   color: #fff;
   padding: 8px 30px;
 }
@@ -1261,23 +1257,17 @@ h6 {
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  background: #2d3e50;
+  background: #ffca58;
   color: #fff;
   text-align: center;
   padding: 1em;
   font-size: 80%;
 }
 
-.footer .copyright {
-  text-align: center;
-  color: #595858;
-}
 
 .footer .credits {
   padding-top: 5px;
-  text-align: center;
   font-size: 13px;
-  color: #595858;
 }
 
 /*--------------------------------------------------------------
