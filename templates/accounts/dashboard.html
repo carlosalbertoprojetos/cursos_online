@@ -12,8 +12,10 @@
         <meta content="" name="description">
         <meta content="" name="keywords">
 
-        <!-- Favicons
-        <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+        <!-- Favicons -->
+        <link rel="stylesheet" href="{% static 'assets/img/favicon.png' %}">
+
+        <!-- <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
         <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> -->
 
         <!-- Google Fonts -->
@@ -31,8 +33,9 @@
         <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
         <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
-        <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}" />
-        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}" /> -->
+        <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+        <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
 
 
         <!-- Template Main CSS File -->
@@ -48,7 +51,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <a href="/" class="logo d-flex align-items-center justify-content-center gap-2">
                     <img src="{% static 'assets/img/logo.png' %}" alt="">
-                    <span class="d-none d-lg-block fs-4 pt-1">Cursos Online</span>
+                    <span class="fs-4 pt-1">Cursos Online</span>
                 </a>
             </div><!-- End Logo -->
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -512,20 +515,36 @@
                     </nav>
                 </div>
 
-                <div class="d-flex gap-3">
-                    <a href="{% url 'accounts:editar_usuario' %}" class="">Conta</a>
-                    <a href="{% url 'accounts:editar_senha' %}" class="">Senha</a>
-                </div>
+
 
             </div>
             <!-- End Page Title -->
 
-            <ul class="p-0" style="list-style: none;">
-                <li class="card card-header">
-                    Bem-vindo, <strong>{{ user }}</strong>
-                </li>
-                {% block menu_options %}
+            <div class="card card-header col-12 col-lg-6">
+                Bem-vindo,
+                <strong>{{ user }}</strong>
+            </div>
+            <div class="card card-header col-12 col-lg-6 p-2">
+                <strong>Configurações</strong>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'accounts:editar_usuario' %}" class="">Conta</a>
+                    <a href="{% url 'accounts:editar_senha' %}" class="">Senha</a>
+                </div>
+            </div>
+            <!-- <li>
+                <a href="{% url 'accounts:editar_usuario' %}">
+                    <i class="fa fa-cog"></i>
+                    Editar Conta
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'accounts:editar_senha' %}">
+                    <i class="fa fa-lock"></i>
+                    Editar Senha</a>
+            </li> -->
 
+            <ul class="p-0" style="list-style: none;">
+                {% block menu_options %}
                 <li class="card card-header p-2"><strong>Cursos Inscrito</strong></li>
                 {% for enrollment in enrollments %}
                 <li>
@@ -536,18 +555,6 @@
                 {% empty %}
                 <li style='padding: 5px 0 5px 15px;'>Não há inscrições</li>
                 {% endfor %}
-                <li class="card card-header p-2"><strong>Configurações de Conta</strong></li>
-                <!-- <li>
-                    <a href="{% url 'accounts:editar_usuario' %}">
-                        <i class="fa fa-cog"></i>
-                        Editar Conta
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'accounts:editar_senha' %}">
-                        <i class="fa fa-lock"></i>
-                        Editar Senha</a>
-                </li> -->
                 {% endblock menu_options %}
             </ul>
             <br>
@@ -1269,9 +1276,6 @@
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                 class="bi bi-arrow-up-short text-white"></i></a>
-        <!-- <div class="footer fixed-bottom text-center p-3">
-                <i><b>Sistema auxiliar de gestão para cursos à distância</b></i>
-            </div> -->
 
 
         <!-- Vendor JS Files -->
@@ -1285,7 +1289,7 @@
         <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
 
         <!-- Template Main JS File -->
-        <script src="{% static 'assets/js/main.js' %}"></script>
+        <!-- <script src="{% static 'assets/js/main.js' %}"></script> -->
 
 
         {% block scripts %}

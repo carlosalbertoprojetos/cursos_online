@@ -1,30 +1,81 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container my-3">
-    <h1>Login</h1><hr style = 'margin: -10px 0 15px 0'>
-    <div class="card card-header card" style = 'padding: 0px 15px'>
-        <form class="pure-form pure-form-stacked" method="post">
-            {% csrf_token %}
-            <fieldset>
-                {{ form.non_field_errors }}
-                {% for field in form %}
-
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {{ field.errors }}
-
-                {% endfor %}
-
-                <div class="pure-controls" style='margin-top: 10px;'>
-                    <button type="submit" class="pure-button pure-button-primary">Entrar</button>
+<!-- Page Title -->
+<div class="page-title mb-4" data-aos="fade">
+    <!-- <div class="heading">
+        <div class="container">
+            <div class="row d-flex justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1>Insira Seus Dados para Entrar</h1>
+                    <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint
+                        voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores.
+                        Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
                 </div>
-            </fieldset>
-            <p style = 'margin: auto; padding-bottom:10px;'>
-                Não é cadastrado? <a href="{% url 'accounts:cadastrar_usuario' %}" title="">Cadastre-se</a> <br />
-                Esqueceu a senha? <a href="{% url 'accounts:resetar_senha' %}" title="">Nova senha</a> <br />
-            </p>
-        </form>
+            </div>
+        </div>
+    </div> -->
+    <nav class="breadcrumbs">
+        <div class="container">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li class="current">Entrar</li>
+            </ol>
+        </div>
+    </nav>
+</div><!-- End Page Title -->
+
+
+<section class="section register d-flex flex-column align-items-top justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="pt-4 pb-2">
+                            <h5 class="card-title text-center pb-0 fs-4">Acessar sua Conta</h5>
+                            <p class="text-center small">Insira seu usuário e senha</p>
+                        </div>
+                        <form class="row g-3 needs-validation" method="post">
+                            {% csrf_token %}
+                            <div class="col-12">
+                                <label for="id_username" class="form-label">Usuário</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="username" class="form-control" id="id_username" required>
+                                    <div class="invalid-feedback">Insira o usuário</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="id_password" class="form-label">Senha</label>
+                                <input type="password" name="password" class="form-control" id="id_password" required>
+                                <div class="invalid-feedback">Insira a senha</div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" value="true"
+                                        id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Lembrar</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit">Entrar</button>
+                            </div>
+                            <div class="col-12">
+                                <p class="small mb-0">Não tem conta? <a
+                                        href="{% url 'accounts:cadastrar_usuario' %}">Criar conta</a>
+                                </p>
+                                <p class="small mb-0">Esqueceu a senha? <a
+                                        href="{% url 'accounts:resetar_senha' %}">Nova senha</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
 {% endblock %}

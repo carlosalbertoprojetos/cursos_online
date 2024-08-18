@@ -16,7 +16,7 @@ class CadastrarUsuarioForm(forms.ModelForm):
         label="Senha",
         widget=forms.PasswordInput(
             attrs={
-                "class": "form-control form-control-sm",
+                "class": "form-control",
             }
         ),
     )
@@ -24,7 +24,7 @@ class CadastrarUsuarioForm(forms.ModelForm):
         label="Confirmação de Senha",
         widget=forms.PasswordInput(
             attrs={
-                "class": "form-control form-control-sm",
+                "class": "form-control",
             },
         ),
     )
@@ -35,12 +35,12 @@ class CadastrarUsuarioForm(forms.ModelForm):
         widgets = {
             "email": forms.EmailInput(
                 attrs={
-                    "class": "form-control form-control-sm",
+                    "class": "form-control",
                 },
             ),
             "username": forms.TextInput(
                 attrs={
-                    "class": "form-control form-control-sm",
+                    "class": "form-control",
                 }
             ),
         }
